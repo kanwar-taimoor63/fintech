@@ -2,7 +2,7 @@
 <p>Find me in app/views/pages/home.html.erb</p>
 
 <% if user_signed_in? %>
-    <p> hello , <%= current_user.username %> 
+    <p> hello , <%= current_user.firstname %> 
     <%= link_to 'signout', destroy_user_session_path, method: 'delete' %>
 
     <%else%>
