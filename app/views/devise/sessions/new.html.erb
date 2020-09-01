@@ -1,26 +1,46 @@
-<h2>Log in</h2>
+<style>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+</style>
+        
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+<div class ="container">
+  <div class="user-sessions">
+    <div class="card-signin" >
+      <div class="login-heading" style="font-weight: lighter;"> 
+      <%= image_tag("/login-icon.png", :alt => "img") %>
+       Login
+      </div>
+      <div class="card-body">
+        <div class="parsley-form">
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    
+            <div class="form-group">
+                <%= f.label :login , "Username or Email" ,class:'required no-transform label' %><br/> 
+                <%= f.text_field :login,class:'form-control ', autofocus: true  %>
+            </div>
+        
+            <div class=" form-group" >
+              <%= f.label :password ,class:"required no-transform label"%><br />
+              <%= f.password_field :password, class:'form-control' ,autocomplete: "current-password" %>
+            </div>
+            <div class="bottom-grid">
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+              <% if devise_mapping.rememberable? %>
+                <div class=" form-group form-check" >
+                  <%= f.check_box :remember_me %>
+                  <%= f.label :remember_me %>
+                </div>
+              <% end %>
+                <%= f.submit "Log in" , class:"btn btn-primary"%>
+                <%= link_to "Lost your password?", new_password_path(User),class:'forget-link' %></div> 
+          <% end %>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
+                <%= link_to "New to FinTech?", new_registration_path(User), class:'forget-link'%><br />
 
-<%= render "devise/shared/links" %>
+</div>
+
+
+
