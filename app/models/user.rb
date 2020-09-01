@@ -4,15 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  enum role: {client: 0, admin: 1}
-
-  after_initialize do
-  	if self.new_record?
-  		self.role ||= :client
-  	end
-  end
-  	
-
-  
-
+  ROLES = {
+    client: "client",
+    admin: "admin"
+  }.freeze
+  enum role: ROLES
 end
