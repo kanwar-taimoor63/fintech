@@ -1,16 +1,11 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-
 <% if user_signed_in? %>
-    <p> hello , <%= current_user.username %> 
-    <%= link_to 'signout', destroy_user_session_path, method: 'delete' %>
-    
 
-    <%else%>
+    <p> hello , <%= current_user.username %> </p>
+    <%= link_to 'signout', destroy_user_session_path, method: 'delete' %>
+<%else%>
 
   <%= link_to "Log in", new_user_session_path %><br />
-
   <%= link_to "Sign up", new_user_registration_path%><br />
 
+<%end%>
 
-    <%end%>

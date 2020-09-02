@@ -3,7 +3,7 @@
   <div class="user-sessions">
     <div class="card-signin" >
       <div class="login-heading" style="font-weight: lighter;"> 
-      <%= image_tag("/login-icon.png", :alt => "img") %>
+      <%= image_tag("login-icon.png", alt: "img") %>
        Login
       </div>
       <div class="card-body">
@@ -11,14 +11,14 @@
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     
             <div class="form-group">
-                <%= f.label :login , "Username or Email" ,class:'required no-transform label' %><br/> 
-                <%= f.text_field :login,class:'form-control ', autofocus: true %>
-                <label style="color: #DCDCDC"><i>Hint: username= firstname lastname<i></label>
+                <%= f.label :login , "Username or Email", class: 'required no-transform label' %><br/> 
+                <%= f.text_field :login, class: 'form-control ', autofocus: true %>
+                <label style="color: #DCDCDC"><i>int: username= firstname lastname<i></label>
             </div>
         
             <div class=" form-group" >
-              <%= f.label :password ,class:"required no-transform label"%><br />
-              <%= f.password_field :password, class:'form-control' ,autocomplete: "current-password" %>
+              <%= f.label :password ,class: "required no-transform label"%><br />
+              <%= f.password_field :password, class: 'form-control', autocomplete: "current-password" %>
             </div>
             <div class="bottom-grid">
 
@@ -28,16 +28,17 @@
                   <%= f.label :remember_me %>
                 </div>
               <% end %>
-                <%= f.submit "Log in" , class:"btn btn-primary"%>
-                <%= link_to "Lost your password?", new_password_path(User),class:'forget-link' %></div> 
+                <%= f.submit "Log in" , class: "btn btn-primary"%>
+                <%= link_to "Lost your password?", new_user_password_path,class: 'forget-link' %></div> 
           <% end %>
         </div>
       </div>
     </div>
   </div>
-    <%= link_to "New to FinTech?", new_registration_path(User), class:'forget-link'%><br />
+    <%= link_to "New to FinTech?", new_user_registration_path, class: 'forget-link'%><br />
 
 </div>
+
 
 
 

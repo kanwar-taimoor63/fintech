@@ -1,9 +1,8 @@
 
-.navbar-logo img{
+.navbar-logo img {
     margin-left: 15px;
-    width: 90px !important;
-    height: 90px !important;
-    flex-wrap: wrap;
+    width: 90px ;
+    height: 90px;
 }
 
 .user-sessions {
@@ -20,7 +19,7 @@ form .form-group {
 }
 
 .card-signin {
-    padding: 0px;
+    padding: 0;
     background: white;
     border: 1px solid #e0dede;
 }
@@ -54,7 +53,7 @@ form .form-group {
 }
 .form-check
 {
-  padding-left: 0px;
+  padding-left: 0;
   padding-top: 6px;
 }
 .label {
@@ -93,7 +92,7 @@ form .form-group {
     line-height: 17px;
     font-size: 14px;
 }
-.btn{
+.btn {
   text-align: center;
   vertical-align: middle;
   display: inline-block;
@@ -110,7 +109,7 @@ form .form-group {
   
 
 }
-a{
+a {
   
    text-align: center;
     text-transform: uppercase;
@@ -135,3 +134,5 @@ a{
         margin-top: 10px;
 
 }
+
+

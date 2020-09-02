@@ -11,9 +11,10 @@
 
   <body>
     <nav class="navbar">
-    <%= link_to image_tag("/logo.png", border: 0), {action: 'home', controller: '/pages'}, 
-    class:"navbar-logo" %></nav>
+      <%= link_to image_tag('logo.png'), pages_path, class: 'navbar-logo' %>
+    </nav>
     <%= render 'layouts/alerts' %>
     <%= yield %>
   </body>
 </html>
+
