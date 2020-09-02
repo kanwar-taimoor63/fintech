@@ -3,5 +3,13 @@
 #
 # Examples:
 admin= User
-.where(email: "admin@fintech.com")
-.first_or_create(firstname: "Muhammad", lastname: "Haroon", password: "Password123!@#", role: User::ROLES[:admin])
+       .where(email: "admin@fintech.com")
+       .first_or_create(firstname: "Muhammad", lastname: "Haroon",
+        password: "Password123!@#", user_role: User::ROLES[:admin])
+
+client= User
+       .where(email: "client@fintech.com")
+       .first_or_create(firstname: "Kanwar", lastname: "Taimoor",
+        password: "password12")
+
+
