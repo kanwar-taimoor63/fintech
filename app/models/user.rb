@@ -4,7 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
- def username
-    self.first_name + " " + self.last_name
- end
+  ROLES = {
+    client: "client",
+    admin: "admin"
+  }.freeze
+  enum role: ROLES
 end
