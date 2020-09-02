@@ -1,0 +1,42 @@
+<div>
+  <h1>Hello admin</h1>
+  <h2>Displaying Square63 clients</h2>
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th >#</th>
+        <th > Name </th>
+        <th >Role</th>
+        <th >Email</th>
+        <th >Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    	<% @users.each do |u| %>
+        <% if u.user_role == User::ROLES[:client] %>
+          <tr>
+  	        <th scope="row">
+              <%= u.id %>
+            </th>
+  	        <td>
+              <%= u.firstname %>
+              <%= u.lastname %>
+            </td>
+            <td>
+              <%= u.email %>
+            </td>
+            <td>
+              <%= u.user_role %>
+            </td>
+  	        <td>
+  	      	  <%= link_to "Show ", admin_user_path(u), class: 'btn btn-primary' %> 
+  	          <%= link_to "Edit ", edit_admin_user_path(u), class: 'btn btn-primary' %>
+  	          <%= link_to "Delete ", admin_user_path(u), class: 'btn btn-primary' , data: {confirm: "Are you sure?"}, method:  :delete %>
+  	        </td>
+      	  </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'Signout', destroy_user_session_path, class: 'btn btn-primary' , method: 'delete' %>
+</div>

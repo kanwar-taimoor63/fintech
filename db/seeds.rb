@@ -8,8 +8,24 @@ admin= User
         password: "Password123!@#", user_role: User::ROLES[:admin])
 
 client= User
-       .where(email: "client@fintech.com")
-       .first_or_create(firstname: "Kanwar", lastname: "Taimoor",
+       .where(email: "client1@fintech.com")
+       .first_or_create(firstname: "Moeed", lastname: "Raza",
         password: "password12")
+
+client= User
+       .where(email: "client2@fintech.com")
+       .first_or_create(firstname: "Bazaid", lastname: "Khan",
+        password: "password12")
+
+client= User
+       .where(email: "client3@fintech.com")
+       .first_or_create(firstname: "Abdul", lastname: "Wasey",
+        password: "password12")
+
+client= User
+          .where(email: "client4@fintech.com")
+          .first_or_create(firstname: "Taha", lastname: "Kibria",
+             password: "password12")
+
 
 
