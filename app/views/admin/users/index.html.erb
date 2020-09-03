@@ -1,40 +1,49 @@
 <div>
+  <nav class="navbar navbar-light bg-dark">
+  <a class="navbar navbar-light bg-light">Fintech</a>
+        <a class="navbar navbar-light bg-light nav-link" href="#">Users <span class="sr-only">(current)</span></a>
+        <a class="navbar navbar-light bg-light nav-link" href="#">Subscriptions</a>
+        <a class="navbar navbar-light bg-light nav-link" href="#">Products</a>
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-primary bg-light" type="submit">Search</button>
+  </form>
+</nav>
+<div>
   <h1>Hello admin</h1>
   <h2>Displaying Square63 clients</h2>
   <table class="table table-dark">
     <thead>
       <tr>
-        <th >#</th>
-        <th > Name </th>
-        <th >Role</th>
-        <th >Email</th>
-        <th >Action</th>
+        <th> # </th>
+        <th> Name </th>
+        <th> Email </th>
+        <th> Role </th>
+        <th> Action </th>
       </tr>
     </thead>
     <tbody>
-    	<% @users.each do |u| %>
-        <% if u.user_role == User::ROLES[:client] %>
+    	<% @users.each do |user| %>
           <tr>
   	        <th scope="row">
-              <%= u.id %>
+              <%= user.id %>
             </th>
   	        <td>
-              <%= u.firstname %>
-              <%= u.lastname %>
+              <%= user.firstname %>
+              <%= user.lastname %>
             </td>
             <td>
-              <%= u.email %>
+              <%= user.email %>
             </td>
             <td>
-              <%= u.user_role %>
+              <%= User::ROLES[:client] %>
             </td>
   	        <td>
-  	      	  <%= link_to "Show ", admin_user_path(u), class: 'btn btn-primary' %> 
-  	          <%= link_to "Edit ", edit_admin_user_path(u), class: 'btn btn-primary' %>
-  	          <%= link_to "Delete ", admin_user_path(u), class: 'btn btn-primary' , data: {confirm: "Are you sure?"}, method:  :delete %>
+  	      	  <%= link_to "Show ", [:admin, user], class: 'btn btn-primary' %>
+  	          <%= link_to "Edit ", [:edit, :admin, user], class: 'btn btn-primary' %>
+  	          <%= link_to "Delete ", [:admin, user], class: 'btn btn-primary' , data: {confirm: "Are you sure?"}, method:  :delete %>
   	        </td>
       	  </tr>
-        <% end %>
       <% end %>
     </tbody>
   </table>

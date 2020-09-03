@@ -8,5 +8,5 @@ class User < ApplicationRecord
     client: "client",
     admin: "admin"
   }.freeze
-  enum role: ROLES
+  enum user_role: ROLES
 end
