@@ -1,0 +1,21 @@
+<div class ="container">
+  <div class="parsley-form user-sessions">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="form-group">
+        <%= f.text_field :firstname, class: 'form-control', placeholder: 'First Name' %><br/>
+        <%= f.text_field :lastname, class: 'form-control', placeholder: 'Last Name' %><br/>
+        <%= f.email_field :email, autocomplete: 'email', class: 'form-control', placeholder: 'Email' %><br/>
+   
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %>
+        <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control', placeholder: 'Password' %><br/>
+        <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control', placeholder: 'Confirm Password' %><br/>
+        <div class='actions text-center'>
+        <%= f.submit 'Sign up', class: 'btn btn-primary' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

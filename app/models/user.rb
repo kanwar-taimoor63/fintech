@@ -2,7 +2,6 @@ class User < ApplicationRecord
   include ActiveModel::Validations
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
- 
   validates :password, presence: true, password: true
   validates :username, uniqueness: { case_sensitive: false }
 
@@ -11,8 +10,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   attr_writer :login
-  
-
+ 
   def login
     @login || self.username || self.email
   end
@@ -25,13 +23,9 @@ class User < ApplicationRecord
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
       where(conditions.to_hash).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
-  
+
     elsif conditions.key?(:username) || conditions.key?(:email)
       where(conditions.to_hash).first
     end
   end
-
-  
 end
-
-
