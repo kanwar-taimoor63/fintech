@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :destroy]
   def index
-    @users = User.all.where(user_role: User::ROLES[:client])
+    @users = User.all.where(role: User::ROLES[:client])
   end
 
   def show
