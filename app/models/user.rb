@@ -8,9 +8,9 @@ class User < ApplicationRecord
   before_validation :add_username_in_db
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :confirmable
   attr_writer :login
- 
+
   def login
     @login || self.username || self.email
   end

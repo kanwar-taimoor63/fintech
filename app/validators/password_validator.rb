@@ -6,11 +6,10 @@ class PasswordValidator < ActiveModel::EachValidator
       " must contain at least one digit"             => /\d+/,
       " must contain at least one special character" => /[^A-Za-z0-9]+/,
       " Length must be of atleast 8 characters" => /.{8,}$/
-            }
+      }
 
     rules.each do |message, regex|
       record.errors.add(:password, message) unless value.match(regex)
     end
   end
 end
- 

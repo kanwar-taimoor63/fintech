@@ -1,7 +1,8 @@
 <% if user_signed_in? %>
 
-    <p> hello , <%= current_user.username %> </p>
-    <%= link_to 'signout', destroy_user_session_path, method: 'delete' %>
+  <p> hello , <%= current_user.username %> </p>
+  <%= link_to 'signout', destroy_user_session_path, method: 'delete' %>
+
 <% else %>
 
   <%= link_to "Log in", new_user_session_path %><br />
