@@ -1,24 +1,20 @@
-class Admin::UsersController < ApplicationController
+class Admin::UsersController < Admin::BaseController
   before_action :set_user, only: [:show, :edit, :destroy]
   def index
-    @users = User.all.where(role: User::ROLES[:client])
+    @users = User.client
   end
 
-  def show
-  end
+  def show; end
 
-  def edit
-  end
+  def edit; end
 
-  def update
-
-  end
+  def update; end
 
   def destroy
     if @user.destroy
       redirect_to admin_users_path, notice: "User has been deleted"
     else
-      redirect_to admin_users_path, notice: "Unable to delete user"
+      flash.now[:alert] = 'Unable to delete user'
     end
   end
 
