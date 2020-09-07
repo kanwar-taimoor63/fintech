@@ -8,6 +8,21 @@ module Admin
 
     def show; end
 
+    def new
+      @user = User.new
+    end
+
+    def create
+      @user = User.new(user_params)
+      @user.confirmed_at = Time.now
+      if @user.save
+        redirect_to admin_users_path, notice: "User added"
+        WelcomeMailer.welcome_email(@user).deliver
+      else
+        render "new"
+      end
+    end
+
     def edit; end
 
     def update; end
@@ -25,6 +40,10 @@ module Admin
 
     def set_user
       @user = User.find(params[:id])
+    end
+
+    def user_params
+      params.require(:user).permit(:firstname, :lastname, :email, :password)
     end
   end
 end
