@@ -23,9 +23,14 @@ class User < ApplicationRecord
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
       where(conditions.to_hash).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
-
     elsif conditions.key?(:username) || conditions.key?(:email)
       where(conditions.to_hash).first
     end
   end
+
+  ROLES = {
+    client: "client",
+    admin: "admin"
+  }.freeze
+  enum role: ROLES
 end
