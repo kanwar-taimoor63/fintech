@@ -32,6 +32,8 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'filterrific'
+gem 'kaminari'
 gem 'devise'
 gem 'bootstrap', '~> 4.5', '>= 4.5.2'
 gem 'strong_password', '~> 0.0.9'

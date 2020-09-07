@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery3
+//= require filterrific/filterrific-jquery
 //= require turbolinks
 //= require rails-ujs
 //= require activestorage
