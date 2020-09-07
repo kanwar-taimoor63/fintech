@@ -1,6 +1,7 @@
 module Admin
   class UsersController < Admin::BaseController
     before_action :set_user, only: [:show, :edit, :destroy]
+
     def index
       @users = User.client
     end
@@ -13,13 +14,17 @@ module Admin
 
     def destroy
       if @user.destroy
-        redirect_to admin_users_path, notice: "User has been deleted"
+        flash[:notice] = "User has been deleted"
+        @message = flash[:notice]
       else
-        flash.now[:alert] = 'Unable to delete user'
+        flash[:alert] = 'Unable to delete user'
+        @message = flash[:alert]
       end
+      redirect_to admin_users_path, message: @message
     end
 
     private
+
     def set_user
       @user = User.find(params[:id])
     end

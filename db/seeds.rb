@@ -10,9 +10,6 @@ user_attributes = [ { email: "admin@fintech.com", password: "Password123!@#", fi
            { firstname: "Taha", lastname: "Kibria", password: "password12", email: "cleint4@fintech.com" },
            { firstname: "Hamza", lastname: "Iqbal", password: "password12", email: "client5@fintech.com" }
          ]
-hashes.length().times do |user|
-  User.where(hashes[user][:email]).create(hashes[user])
+user_attributes.length().times do |user|
+  User.where(user_attributes[user][:email]).create(user_attributes[user])
 end
-
-
-
