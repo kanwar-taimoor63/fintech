@@ -20,7 +20,7 @@ module Admin
         flash[:alert] = 'Unable to delete user'
         @message = flash[:alert]
       end
-      redirect_to admin_users_path, message: @message
+      redirect_to admin_users_path
     end
 
     private
