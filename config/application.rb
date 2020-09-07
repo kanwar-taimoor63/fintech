@@ -26,5 +26,5 @@ module Fintech
     config.to_prepare do
       Devise::Mailer.layout 'email'
     end
-end
+  end
 end

@@ -3,4 +3,3 @@ class PagesController < ApplicationController
 
   def policy; end
 end
-
