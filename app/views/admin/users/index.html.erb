@@ -4,6 +4,7 @@
     <%= link_to "Users", '#' , class: 'navbar navbar-light bg-primary text-white nav-link' %>
     <%= link_to "Subscriptions", '#', class: "navbar navbar-light bg-primary text-white nav-link" %>
     <%= link_to "Products", '#', class: "navbar navbar-light bg-primary text-white nav-link" %>
+    <%= link_to "My Profile", [:admin, current_user], class: "navbar navbar-light bg-primary text-white nav-link" %>
     <div class="form-inline">
       <%= form_with model: @post do |form| %>
         <%= form.text_field :search, class: 'form-control mr-sm-2', placeholder: "Search" %>
