@@ -1,6 +1,6 @@
 module Admin
   class UsersController < Admin::BaseController
-    before_action :set_user, only: [:show, :edit, :destroy]
+    before_action :set_user, only: [:show, :edit, :destroy, :update]
 
     def index
       @users = User.client
@@ -10,7 +10,13 @@ module Admin
 
     def edit; end
 
-    def update; end
+    def update
+      if @user.update(user_params)
+        redirect_to [:admin, @user], notice: 'User was successfully updated.'
+      else
+        redirect_to [:admin, @user] , notice: @user.errors
+      end
+    end
 
     def destroy
       if @user.destroy
@@ -26,5 +32,10 @@ module Admin
     def set_user
       @user = User.find(params[:id])
     end
+
+    def user_params
+      params.require(:user).permit(:firstname, :lastname, :email, :password)
+    end
+
   end
 end
