@@ -15,10 +15,8 @@ module Admin
     def destroy
       if @user.destroy
         flash[:notice] = "User has been deleted"
-        @message = flash[:notice]
       else
         flash[:alert] = 'Unable to delete user'
-        @message = flash[:alert]
       end
       redirect_to admin_users_path
     end
