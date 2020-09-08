@@ -1,20 +1,16 @@
 module Admin
   class UsersController < Admin::BaseController
     before_action :set_user, only: %i[show edit destroy]
+    helper_method :sort_column, :sort_direction
 
     def index
-      @filterrific = initialize_filterrific(
-        User.client,
-        params[:filterrific],
-        select_options: { sorted_by: User.options_for_sorted_by }
-      ) || return
-      @users = @filterrific.find.page(params[:page])
-      respond_to do |format|
-        format.html
-        format.js
-      end
-    rescue ActiveRecord::RecordNotFound
-      redirect_to(reset_filterrific_url(format: :html)) && return
+      return @users = User.search(params[:search]) if params[:search]
+
+      @users = if sort_column && sort_direction
+                 User.order(sort_column + ' ' + sort_direction)
+               else
+                 User.search(params[:search])
+            end
     end
 
     def show; end
@@ -34,8 +30,20 @@ module Admin
 
     private
 
+    def sort_column
+      User.column_names.include?(params[:sort]) ? params[:sort] : 'username'
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+    end
+
     def set_user
       @user = User.find(params[:id])
+    end
+
+    def user_params
+      params.require(:user).permit(:firstname, :lastname, :email, :password, :search)
     end
   end
 end

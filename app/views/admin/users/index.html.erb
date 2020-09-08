@@ -6,14 +6,9 @@
     <%= link_to 'Products', '#', class: 'navbar navbar-light bg-primary text-white nav-link' %>
     <%= link_to 'My Profile', [:admin, current_user], class: 'navbar navbar-light bg-primary text-white nav-link' %>
     <div class= 'form-inline' >
-      <%= form_for_filterrific @filterrific do |f| %>
-        <div>
-          Search
-          <%= f.text_field( :search_query, class: 'filterrific-periodically-observed')%>
-          <div >
-            <%= link_to('Reset filters', reset_filterrific_url) %>
-          </div>
-        </div>
+      <%= form_with method: :get, local: true do |f| %>
+      <%= f.text_field :search,value: params[:search] %>
+      <%= f.submit 'search' %>
       <% end %>
     </div>
   </nav>
@@ -23,10 +18,10 @@
   <table class= 'table table-dark' >
     <thead>
       <tr>
-        <th> <%= filterrific_sorting_link(@filterrific, :id, data: { turbolinks: false }) %> </th>
-        <th> <%= filterrific_sorting_link(@filterrific, :username, data: { turbolinks: false }) %> </th>
-        <th> <%= filterrific_sorting_link(@filterrific, :email, data: { turbolinks: false }) %>  </th>
-        <th> Role </th>
+        <th> <%= sortable 'id' %> </th>
+        <th> <%= sortable 'username' %> </th>
+        <th> <%= sortable 'email' %> </th>
+        <th> <%= sortable 'role' %> </th>
         <th> Action </th>
       </tr>
     </thead>
