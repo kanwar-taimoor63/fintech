@@ -2,6 +2,7 @@ class User < ApplicationRecord
   include ActiveModel::Validations
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  paginates_per 5
   validates :password, presence: true, password: true
   validates :username, uniqueness: { case_sensitive: false }
 
