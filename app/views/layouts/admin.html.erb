@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fintech</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <nav class= 'navbar navbar-light bg-primary' >
+      <a class= 'navbar-brand' href='/' >
+      <img src= '/assets/logo2.png' width='40' height='40' >
+      </a>
+    </nav><hr/>
+    <div class= 'row' >
+      <div class= 'col-2' >
+        <nav class= 'flex-fill  navbar navbar-light bg-primary' >
+          <%= link_to admin_users_path, class: 'bg-primary' do %>
+            <li class = 'nav-item bg-primary text-center text-white' >
+            <%= image_tag ('users.png') %><br/>
+            <label> Users</label>
+            <hr/></li>
+          <% end %>
+          <%= link_to admin_categories_path, class: 'bg-primary' do %>
+            <li class = 'nav-item bg-primary text-center' >
+            <%= image_tag ('category.png'), class: 'bg-primary' %><br/>
+            <label class='bg-primary text-white'> Categories</label>
+            <hr/></li>
+          <% end %>
+          <%= link_to '#', class:'bg-primary' do %>
+            <li class =' nav-item bg-primary text-center' >
+            <%= image_tag ('coupons.png'), class: 'bg-primary' %><br/>
+            <label class= 'bg-primary text-white' > Cupons</label>
+            <hr/></li>
+          <% end %>
+          <br/><label class= 'bg-primary text-white' style='margin-top: 60px; font-size: 12px;' > © Copyright 2020 FinTech Inc</label>
+        </nav>
+      </div>
+      <div class= 'col-9' >
+        <div class= 'container' >
+          <%= render 'layouts/alerts' %>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+

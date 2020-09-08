@@ -1,5 +1,5 @@
 require_relative 'boot'
-
+require 'csv'
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
@@ -14,6 +14,8 @@ module Fintech
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    # WILL ADD MAIL CATCHER IN THE NEXT COMMIT 
     ActionMailer::Base.smtp_settings = {
       address: 'smtp.gmail.com',
       domain:  'mail.google.com',

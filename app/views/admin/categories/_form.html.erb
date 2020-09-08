@@ -1,0 +1,10 @@
+<%= form_with(model: category,url: [:admin, category], local: true) do |form| %>
+<%= render 'layouts/alerts' %>
+  <div class= 'field form-group' >
+    <%= form.label :name, 'Name of Category' %><br/>
+    <%= form.text_field :name, autofocus: true, required: true, placeholder: 'Name' %>
+  </div><br/>
+  <div class= 'actions'>
+    <%= form.submit 'Add Category', class: 'btn btn-primary' %>
+  </div>
+<% end %>
