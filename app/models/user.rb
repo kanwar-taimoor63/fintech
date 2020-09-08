@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   def self.search(search)
     if search
-      where('users.username LIKE ? || users.email LIKE ?', "%#{search}%", "%#{search}%")
+      where('users.username LIKE ? || users.email LIKE ? || users.id LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
     else
       all
     end
