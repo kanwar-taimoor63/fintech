@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   include ActiveModel::Validations
+  TEMP_PASSWORD = "Password123!@#"
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   validates :password, presence: true, password: true
@@ -28,8 +29,8 @@ class User < ApplicationRecord
     end
   end
 
-  def invite(user)
-    WelcomeMailer.welcome_email(user).deliver_later
+  def invite
+    WelcomeMailer.welcome_email(self).deliver_later
   end
 
   ROLES = {
