@@ -36,6 +36,7 @@ gem 'devise'
 gem 'bootstrap', '~> 4.5', '>= 4.5.2'
 gem 'strong_password', '~> 0.0.9'
 gem 'jquery-rails'
+gem 'kaminari'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 

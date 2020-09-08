@@ -3,7 +3,7 @@ module Admin
     before_action :set_user, only: [:show, :edit, :destroy]
 
     def index
-      @users = User.client
+      @users = User.client.order(:lastname).page(params[:page])
     end
 
     def show; end
