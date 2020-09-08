@@ -19,3 +19,9 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require_tree .
+$(document).ready(function()
+{
+  $('#password-link').click(function(e){
+  $('#password-form').show();
+});
+});
