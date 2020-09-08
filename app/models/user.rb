@@ -28,6 +28,10 @@ class User < ApplicationRecord
     end
   end
 
+  def invite(user)
+    WelcomeMailer.welcome_email(user).deliver_later
+  end
+
   ROLES = {
     client: "client",
     admin: "admin"

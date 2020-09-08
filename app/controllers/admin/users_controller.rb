@@ -13,13 +13,13 @@ module Admin
     end
 
     def create
-      @user = User.new(user_params)
-      @user.confirmed_at = Time.now
+      @user = User.new(user_params.merge(confirmed_at: Time.zone.now))
+      @user.password = "Password123!@#"
       if @user.save
         redirect_to admin_users_path, notice: "User added"
-        WelcomeMailer.welcome_email(@user).deliver
+        @user.invite(@user)
       else
-        render "new"
+        render :new
       end
     end
 
