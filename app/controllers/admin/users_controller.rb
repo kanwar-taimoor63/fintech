@@ -4,6 +4,11 @@ module Admin
 
     def index
       @users = User.client
+
+      respond_to do |format|
+        format.html
+        format.csv { send_data @users.to_csv, filename: "users-#{Date.today}.csv" }
+      end
     end
 
     def show; end
