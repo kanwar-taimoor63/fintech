@@ -1,0 +1,18 @@
+<%= form_with(model: product,url: [:admin, product], local: true) do |form| %>
+  <%= render 'layouts/alerts' %>
+  <div class= 'field form-group' >
+    <%= form.label :title, 'Product Name' %><br/>
+    <%= form.text_field :title, autofocus: true, required: true, placeholder: 'Name' %> <br/>
+    <%= form.label :price, 'Price' %> <br/>
+    <%= form.text_field :price, autofocus: true, required: true, placeholder: 'Price' %> <br/>
+    <%= form.label :description, 'Product Description' %> <br/>
+    <%= form.text_area :description, autofocus: true, placeholder: 'Description' %> <br/>
+    <%= form.label :category_id, 'Product Category' %> <br/>
+    <%= form.text_field :category_id, autofocus: true, required: true, placeholder: 'Category' %> <br/>
+    <%= form.label :status, 'Status' %> <br/>
+    <%= form.select :status, [Product::STATUS[:publish], Product::STATUS[:draft], Product::STATUS[:pending]], required: true %>
+  </div><br/>
+  <div class= 'actions'>
+    <%= form.submit 'Add Product', class: 'btn btn-primary' %>
+  </div>
+<% end %>

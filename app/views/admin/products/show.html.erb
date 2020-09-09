@@ -1,0 +1,15 @@
+<h2>Product ID: <%= @product.id %></h2>
+<p>
+  <strong>Name of Product:</strong>
+  <%= @product.title %>
+</p> <br/>
+<p>
+  <strong>Price of Product:</strong>
+  <%= @product.price %>
+</p> <br/>
+<p>
+  <strong>Description of Product:</strong>
+  <%= @product.description %>
+</p> <br/>
+  <%= link_to 'Back', admin_products_path, class: 'btn btn-primary' %>
+</p>

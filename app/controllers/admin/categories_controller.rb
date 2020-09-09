@@ -23,7 +23,7 @@ module Admin
       else
         render :new
       end
-      end
+    end
 
     def edit; end
 
