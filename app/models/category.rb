@@ -1,4 +1,6 @@
 class Category < ApplicationRecord
+  has_many :products
+
   def self.to_csv
     attributes = %w[id name]
 
