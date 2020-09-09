@@ -1,16 +1,13 @@
 module Admin
   class UsersController < Admin::BaseController
+    include Orderable
     before_action :set_user, only: %i[show edit destroy]
     helper_method :sort_column, :sort_direction
 
     def index
-      return @users = User.search(params[:search]) if params[:search]
-
-      @users = if sort_column && sort_direction
-                 User.order(sort_column + ' ' + sort_direction)
-               else
-                 User.search(params[:search])
-            end
+      @users = User.all
+      @users = User.order(sort_column + ' ' + sort_direction) if sort_column.present? && sort_direction.present?
+      return @users = User.search(params[:search]) if params[:search].present?
     end
 
     def show; end
@@ -29,14 +26,6 @@ module Admin
     end
 
     private
-
-    def sort_column
-      User.column_names.include?(params[:sort]) ? params[:sort] : 'username'
-    end
-
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
-    end
 
     def set_user
       @user = User.find(params[:id])

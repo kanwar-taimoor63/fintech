@@ -11,11 +11,7 @@ class User < ApplicationRecord
   attr_writer :login
 
   def self.search(search)
-    if search
-      where('users.username LIKE ? || users.email LIKE ? || users.id LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
-    else
-      all
-    end
+    where('users.username LIKE ? || users.email LIKE ? || users.id LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
   end
 
   def login
