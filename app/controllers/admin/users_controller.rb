@@ -6,8 +6,12 @@ module Admin
 
     def index
       @users = User.all
-      @users = User.order(sort_column + ' ' + sort_direction) if sort_column.present? && sort_direction.present?
-      return @users = User.search(params[:search]) if params[:search].present?
+      if params[:search].present?
+        @users = User.search(params[:search])
+        @users = @users.order(sort_column(@users) + ' ' + sort_direction) if sort_column(@users).present? && sort_direction.present?   
+      else
+        @users = User.order(sort_column(@users) + ' ' + sort_direction) if sort_column(@users).present? && sort_direction.present?
+      end
     end
 
     def show; end

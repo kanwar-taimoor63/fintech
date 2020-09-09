@@ -2,8 +2,8 @@ module Orderable
   extend ActiveSupport::Concern
 
   included do
-    def sort_column
-      User.column_names.include?(params[:sort]) ? params[:sort] : 'username'
+    def sort_column(user)
+      user.column_names.include?(params[:sort]) ? params[:sort] : 'username'
       end
 
     def sort_direction
