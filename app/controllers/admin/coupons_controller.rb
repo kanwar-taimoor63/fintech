@@ -1,12 +1,21 @@
 module Admin
   class CouponsController < Admin::BaseController
+    include Orderable
     before_action :set_coupons, only: %i[show edit destroy update]
+    helper_method :sort_column, :sort_direction
 
     def index
-      @pagy, @coupon = pagy(Coupon.all, items: 5)
+      #@users = User.all
+      @pagy, @coupons = pagy(Coupon.all, items: 5)
       respond_to do |format|
         format.html
         format.csv { send_data Coupon.all.to_csv, filename: "coupons-#{Date.today}.csv" }
+      end
+      if params[:search].present?
+       @pagy, @coupons =pagy( Coupon.search(params[:search]), items: 5)
+       @pagy, @coupons = pagy(@coupons.order(sort_column(@coupons) + ' ' + sort_direction), items: 5) if sort_column(@coupons).present? && sort_direction.present?   
+      else
+       @pagy, @coupons =pagy( Coupon.order(sort_column(@coupons) + ' ' + sort_direction), items: 5) if sort_column(@coupons).present? && sort_direction.present?
       end
     end
 
@@ -53,7 +62,7 @@ module Admin
     end
 
     def coupon_params
-      params.require(:coupon).permit(:name, :value)
+      params.require(:coupon).permit(:name, :value,:search)
     end
   end
 end
