@@ -1,0 +1,8 @@
+<h2>Coupon <%= @coupon.id %></h2>
+<p>
+  <strong>Name of Coupon:</strong>
+  <%= @coupon.name %></p><br/>
+  <strong>Value of Coupon:</strong>
+  <%= @coupon.value %></p><br/>
+  <%= link_to 'Back', admin_coupons_path, class: 'btn btn-primary' %>
+</p>
