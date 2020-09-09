@@ -28,6 +28,22 @@ class User < ApplicationRecord
     end
   end
 
+  def self.to_csv
+    attributes = %w{id name email role}
+
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+      find_each do |user|
+        csv << attributes.map{ |attr| user.send(attr) }
+      end
+    end
+  end
+
+  def name
+    "#{firstname} #{lastname}"
+  end
+
   ROLES = {
     client: "client",
     admin: "admin"
