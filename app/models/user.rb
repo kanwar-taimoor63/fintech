@@ -34,7 +34,7 @@ class User < ApplicationRecord
     CSV.generate(headers: true) do |csv|
       csv << attributes
 
-      all.each do |user|
+      User.find_each do |user|
         csv << attributes.map{ |attr| user.send(attr) }
       end
     end
