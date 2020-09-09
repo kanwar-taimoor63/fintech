@@ -1,0 +1,8 @@
+module UsersHelper
+  def sortable(column, title = nil)
+    title ||= column.titleize
+    css_class = column == sort_column(@users) ? "current #{sort_direction}" : nil
+    direction = column == sort_column(@users) && sort_direction == 'asc' ? 'desc' : 'asc'
+    link_to title, { sort: column, direction: direction, search: params[:search] }, { class: css_class }
+  end
+end

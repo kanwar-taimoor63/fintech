@@ -4,9 +4,11 @@ Rails.application.routes.draw do
 
   authenticate :user, ->(user) { user.admin? } do
     namespace :admin do
+
       resources :users
       resources :categories
       resources :coupons
+
     end
   end
 
