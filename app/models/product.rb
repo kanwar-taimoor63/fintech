@@ -13,6 +13,10 @@ class Product < ApplicationRecord
     end
   end
 
+  def self.search(search)
+    where('products.id LIKE ? || products.title LIKE ? || products.status LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
+  end
+
   STATUS = {
     publish: "publish",
     draft: "draft",

@@ -1,16 +1,16 @@
 module Admin
   class UsersController < Admin::BaseController
-    include Orderable
+
     before_action :set_user, only: %i[show edit destroy]
-    helper_method :sort_column, :sort_direction
+
 
     def index
-      @users = User.all
+      @pagyz, @users = pagy(User.client, items: 5)
       if params[:search].present?
-        @users = User.search(params[:search])
-        @users = @users.order(sort_column(@users) + ' ' + sort_direction) if sort_column(@users).present? && sort_direction.present?   
+        @pagyz, @users = pagy(@users.search(params[:search]),items: 5)
+        @pagyz, @users = pagy(@users.order(sort_column(@users) + ' ' + sort_direction), items: 5) if sort_column(@users).present? && sort_direction.present?
       else
-        @users = User.order(sort_column(@users) + ' ' + sort_direction) if sort_column(@users).present? && sort_direction.present?
+        @pagyz, @users = pagy(@users.order(sort_column(@users) + ' ' + sort_direction), items: 5) if sort_column(@users).present? && sort_direction.present?
       end
     end
 

@@ -1,9 +1,16 @@
 module Admin
   class ProductsController < BaseController
-    before_action :set_product, only: [:show, :edit, :update, :destroy]
+    before_action :set_product, only: %i[show edit update destroy]
 
     def index
       @pagys, @products = pagy(Product.all, items: 5)
+      if params[:search].present?
+        @pagys, @products = pagy(Product.search(params[:search]), items: 5)
+        @pagys, @products = pagy(@products.order(sort_column(@products) + ' ' + sort_direction), items: 5) if sort_column(@products).present? && sort_direction.present?
+      else
+        @pagys, @products = pagy(@products.order(sort_column(@products) + ' ' + sort_direction),items: 5) if sort_column(@products).present? && sort_direction.present?
+      end
+
       respond_to do |format|
         format.html
         format.csv { send_data Product.all.to_csv, filename: "Products-#{Date.today}.csv" }

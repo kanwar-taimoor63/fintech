@@ -1,5 +1,5 @@
 class Category < ApplicationRecord
-  has_many :products
+  has_many :products, dependent: :destroy
 
   def self.to_csv
     attributes = %w[id name]
@@ -12,4 +12,9 @@ class Category < ApplicationRecord
       end
     end
   end
+
+  def self.search(search)
+    where('categories.id LIKE ? || categories.name LIKE ?', "%#{search}%", "%#{search}%")
+  end
+
 end
