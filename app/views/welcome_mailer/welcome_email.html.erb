@@ -1,0 +1,10 @@
+<h1>Welcome to our app </h1>
+<h3>Hi <%= @user.username %></h3>
+<p>
+  <b> firstname:  </b> <%= @user.firstname %> <br/>
+  <b> lastname: </b> <%= @user.lastname %> <br/>
+  <b> email: </b><%= @user.email %> <br/>
+  <b> password: </b> <%= User::TEMP_PASSWORD %> <br/>
+  Sample mail sent using smtp.
+</p>
+

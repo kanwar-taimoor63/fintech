@@ -11,6 +11,20 @@ module Admin
 
     def show; end
 
+    def new
+      @user = User.new
+    end
+
+    def create
+      @user = User.new(user_params.merge(confirmed_at: Time.zone.now, password: User::TEMP_PASSWORD))
+      if @user.save
+        redirect_to admin_users_path, notice: "User added"
+        @user.invite
+      else
+        render :new
+      end
+    end
+
     def edit; end
 
     def update; end
