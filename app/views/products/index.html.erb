@@ -1,0 +1,28 @@
+<h3>Products</h3>
+<div class='container'>
+  <div class='row'>
+    <% @products.each do |product| %>
+      <div class='col-sm-4'>
+        <div class='card' style='width: 18rem;'>
+          <img class='card-img-top' src='/assets/logo.png' alt='Card image cap'>
+          <div class='card-body'>
+            <h5 class='card-title text-uppercase'><%= product.category.name %></h5>
+            <h4 class='card-title text-primary text-capitalize'><%= product.title %></h4>
+            <h6 class='card-text'>$<%= product.price %></h6><hr/>
+            <div >
+              <%= link_to root_path do %>
+                <%=  image_tag('cart.png') %>
+                Add to cart
+              <% end %>
+              <%= link_to product, class: 'float-right' do %>
+                <%=  image_tag('details.png',style: 'width 20px; height: 20px;')%>
+                Details
+              <% end %>
+            </div>
+          </div>
+        </div><br/>
+      </div>
+    <% end %>
+  </div>
+</div>
+<br/><%= pagy_bootstrap_nav(@pagys).html_safe %>

@@ -3,7 +3,7 @@ module Admin
     before_action :set_product, only: [:show, :edit, :update, :destroy]
 
     def index
-      @pagys, @products = pagy(Product.all, items: PER_PAGE)
+      @pagys, @products = pagy(Product.all, items: Product::PER_PAGE)
       respond_to do |format|
         format.html
         format.csv { send_data Product.all.to_csv, filename: "Products-#{Date.today}.csv" }

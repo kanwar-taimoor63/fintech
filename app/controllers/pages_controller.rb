@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
-  def home; end
-
-  def policy; end
+  before_action :authenticate_user!, except: [:policy]
+ 
+  def home;end
+  def policy; end 
 end
