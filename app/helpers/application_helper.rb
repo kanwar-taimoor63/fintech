@@ -1,5 +1,6 @@
 module ApplicationHelper
   include Pagy::Frontend
+
   def sortable(column, title = nil ,temp)
     title ||= column.titleize
     css_class = column == sort_column(temp) ? "current #{sort_direction}" : nil
