@@ -1,23 +1,23 @@
 <div class ='container'>
-  <div class= 'user-sessions' >
-    <div class= 'card-signin'  >
-      <div class= 'login-heading' style= 'font-weight: lighter;' > 
+  <div class='user-sessions'>
+    <div class='card-signin'>
+      <div class='login-heading' style= 'font-weight: lighter;'> 
       <%= image_tag('login-icon.png', alt: 'img') %>
        Login
       </div>
-      <div class= 'card-body' >
-        <div class= 'parsley-form' >
+      <div class='card-body'>
+        <div class='parsley-form'>
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-            <div class='form-group' >
+            <div class='form-group'>
               <%= f.label :login , 'Username or Email', class: 'required no-transform label' %><br/> 
                 <%= f.text_field :login, class: 'form-control ', autofocus: true, required: true %>
                 <label class= 'less-imp-label'>Hint: username= firstname lastname</label>
             </div>
-            <div class=' form-group' >
+            <div class='form-group'>
               <%= f.label :password ,class: 'required no-transform label'%><br />
               <%= f.password_field :password, class: 'form-control', autocomplete: 'current-password', required: true %>
             </div>
-            <div class= 'bottom-grid' >
+            <div class='bottom-grid'>
               <% if devise_mapping.rememberable? %>
                 <div class= 'form-group form-check' >
                   <%= f.check_box :remember_me %>
@@ -32,11 +32,11 @@
       </div>
     </div>
   </div>
-  <div class= 'signup-btn' >
-  <label id= 'signup-btn-id' class= 'forget-link' data-turbolinks= 'false'>NEW TO FINTECH</label>
+  <div class='signup-btn'>
+  <label id='signup-btn-id' class='forget-link' data-turbolinks='false'>NEW TO FINTECH</label>
 </div>
   <br />
 </div>
-<div id= 'signup-form' >
+<div id='signup-form'>
   <%= render 'devise/registrations/form' %>
 </div>

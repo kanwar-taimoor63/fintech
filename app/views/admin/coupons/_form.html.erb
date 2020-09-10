@@ -1,16 +1,16 @@
-<div class = 'container' >
-  <div class= 'parsley-form user-sessions' >
+<div class ='container'>
+  <div class='parsley-form user-sessions'>
     <%= form_with(model: coupon, url: [:admin, coupon], local: true) do |form| %>
       <%= render '/shared/error_msg', resource: coupon %>
-      <div class= 'form-group' >
+      <div class='form-group'>
         <%= form.label :name , 'Name of Coupon', class: 'required no-transform label' %><br/> 
         <%= form.text_field :name, class: 'form-control ', autofocus: true, required: true %>
         <%= form.label :value, 'Value of Coupon' %><br/>
         <%= form.number_field :value,class: 'form-control ', autofocus: true, required: true %>
         <label >Select products:</label>
-        <%=form.collection_select:'product_ids', Product.all, :id, :title, {prompt: 'Please Select a Sector'}, {multiple true}%><br>
+        <%=form.collection_select:'product_ids', Product.all, :id, :title, { prompt: 'Please Select a Sector' }, { multiple true }%><br>
       </div><br/>
-      <div class= 'actions'>
+      <div class='actions'>
         <%= form.submit 'Add Coupon', class: 'btn btn-primary' %>
       </div>
     <% end %>

@@ -1,6 +1,6 @@
 <%= form_with(model: product,url: [:admin, product], local: true) do |form| %>
   <%= render '/shared/error_msg', resource: product %>
-  <div class= 'field form-group' >
+  <div class='field form-group'>
     <%= form.label :title, 'Product Name' %><br/>
     <%= form.text_field :title, autofocus: true, required: true, placeholder: 'Name' %> <br/>
     <%= form.label :price, 'Price' %> <br/>
@@ -12,9 +12,9 @@
     <%= form.label :status, 'Status' %> <br/>
     <%= form.select :status, [Product::STATUS[:publish], Product::STATUS[:draft], Product::STATUS[:pending]], required: true %>
      <label >Select coupon:</label>
-    <%=form.collection_select:'coupon_ids', Coupon.all, :id, :name, {prompt:'Please Select a Sector'}, {multiple: true}%>
+    <%=form.collection_select:'coupon_ids', Coupon.all, :id, :name, { prompt:'Please Select a Sector' }, { multiple: true }%>
   </div><br/>
-  <div class= 'actions'>
+  <div class='actions'>
     <%= form.submit 'Add Product', class: 'btn btn-primary' %>
   </div>
 <% end %>
