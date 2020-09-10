@@ -3,7 +3,7 @@ module Admin
     before_action :set_category, only: %i[show edit destroy update]
 
     def index
-      @pagy, @categories = pagy(Category.search(params[:search]), items: PER_PAGE)
+      @pagy, @categories = pagy(Category.search(params[:search]), items: Class::PER_PAGE)
         if sort_column(@categories).present? && sort_direction.present?
           @pagys, @categoriess = pagy(@categories.order(sort_column(@categories) + ' ' + sort_direction), items: PER_PAGE)
         end

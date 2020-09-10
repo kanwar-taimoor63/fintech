@@ -3,7 +3,7 @@ module Admin
     before_action :set_product, only: %i[show edit update destroy]
 
     def index
-      @pagys, @products = pagy(Product.search(params[:search]), items: PER_PAGE)
+      @pagys, @products = pagy(Product.search(params[:search]), items: Class::PER_PAGE)
       if sort_column(@products).present? && sort_direction.present?
         @pagys, @products = pagy(@products.order(sort_column(@products) + ' ' + sort_direction), items: PER_PAGE)
       end

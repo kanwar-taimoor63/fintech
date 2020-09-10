@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
   belongs_to :category
+  PER_PAGE = 5
 
   def self.to_csv
     attributes = %w[id title]
@@ -15,6 +16,7 @@ class Product < ApplicationRecord
 
   def self.search(search)
     return all if search.blank?
+
     where('products.id LIKE ? OR products.title LIKE ? OR products.status LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
   end
 

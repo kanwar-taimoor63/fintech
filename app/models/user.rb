@@ -12,6 +12,7 @@ class User < ApplicationRecord
 
   def self.search(search)
     return all if search.blank?
+
     where('users.username LIKE ? OR users.email LIKE ? OR users.id LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
   end
 
