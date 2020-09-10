@@ -2,24 +2,35 @@ module Admin
   class CouponsController < Admin::BaseController
     before_action :set_coupons, only: %i[show edit destroy update]
 
-    def index
-      @pagy, @coupons = pagy(Coupon.all, items: 5)
-      respond_to do |format|
-        format.html
-        format.csv { send_data Coupon.all.to_csv, filename: "coupons-#{Date.today}.csv" }
-      end
+def index
+  @pagy, @coupons = pagy(Coupon.search(params[:search]),items: PER_PAGE)
+  if sort_column(@coupons).present? && sort_direction.present?
+   @pagy, @coupons= pagy(@coupons.order(sort_column(@coupons) + ' ' + sort_direction),items: PER_PAGE)
+  end
+  respond_to do |format|
+    format.html
+    format.csv { send_data Coupon.all.to_csv, filename: "coupons-#{Date.today}.csv" }
+  end
+end
 
-      if params[:search].present?
-        @pagy, @coupons = pagy(Coupon.search(params[:search]), items: 5)
-        if sort_column(@coupons).present? && sort_direction.present?
-          @pagy, @coupons = pagy(@coupons.order(sort_column(@coupons) + ' ' + sort_direction), items: 5)
-        end
-      else
-        if sort_column(@coupons).present? && sort_direction.present?
-          @pagy, @coupons = pagy(Coupon.order(sort_column(@coupons) + ' ' + sort_direction), items: 5)
-        end
-      end
-    end
+    # def index
+    #   @pagy, @coupons = pagy(Coupon.all,PER_PAGE)
+
+    #   if params[:search].present?
+    #     @pagy, @coupons = pagy(Coupon.search(params[:search]), items: 5)
+    #     if sort_column(@coupons).present? && sort_direction.present?
+    #       @pagy, @coupons = pagy(@coupons.order(sort_column(@coupons) + ' ' + sort_direction), items: 5)
+    #     end
+    #   else
+    #     if sort_column(@coupons).present? && sort_direction.present?
+    #       @pagy, @coupons = pagy(Coupon.order(sort_column(@coupons) + ' ' + sort_direction), items: 5)
+    #     end
+    #   end
+    #   respond_to do |format|
+    #     format.html
+    #     format.csv { send_data Coupon.all.to_csv, filename: "coupons-#{Date.today}.csv" }
+    #   end
+    # end
 
     def show; end
 

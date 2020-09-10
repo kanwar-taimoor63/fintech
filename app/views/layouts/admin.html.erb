@@ -9,15 +9,16 @@
   </head>
 
   <body>
-    <nav class= 'navbar navbar-light bg-primary'>
-      <a class= 'navbar-brand' href='/'>
-      <img src= '/assets/logo2.png' width='40' height='40' >
-      </a>
-    </nav><hr/>
+           
     <div class= 'row'>
       <div class= 'col-2'>
         <nav class= 'flex-fill  navbar navbar-light bg-primary' >
 
+          <%= link_to root_path, class: 'bg-primary' do %>
+            <li class = 'nav-item bg-primary text-center  ' >
+            <img src= '/assets/logo2.png' width='50' height='50' >
+            <hr/></li>
+          <% end %> 
           <%= link_to admin_users_path, class: 'bg-primary' do %>
             <li class = 'nav-item bg-primary text-center ' >
             <%= image_tag ('users.png') %><br/>
@@ -45,8 +46,11 @@
           <br/><label class= 'bg-primary text-white' style='margin-top: 60px; font-size: 12px;' > © Copyright 2020 FinTech Inc</label>
         </nav>
       </div>
+
       <div class= 'col-9' >
-        <div class= 'container' >
+        <div class= 'container' ><br/>
+          <%= link_to 'Signout', destroy_user_session_path, class: 'btn btn-primary float-right' , method: :delete %>
+          <hr class='mt-5' />
           <%= render 'layouts/alerts' %>
           <%= yield %>
         </div>

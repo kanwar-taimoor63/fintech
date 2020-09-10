@@ -1,18 +1,13 @@
 class Coupon < ApplicationRecord
   has_and_belongs_to_many :products
+  validates_associated :products
   
   def self.search(search)
+    return all if search.blank?
     where('coupons.name LIKE ? OR coupons.id LIKE ? OR coupons.value LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
   end
-  def self.to_csv
-    attributes = %w[id name value]
 
-    CSV.generate(headers: true) do |csv|
-      csv << attributes
-
-      find_each do |coupon|
-        csv << attributes.map { |attr| coupon.send(attr) }
-      end
-    end
+  def self.csv_attr
+    %w[id name value]
   end
 end
