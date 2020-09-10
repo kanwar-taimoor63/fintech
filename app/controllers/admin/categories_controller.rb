@@ -35,7 +35,7 @@ module Admin
         render :edit
 
       end
-      end
+    end
 
     def destroy
       if @category.destroy

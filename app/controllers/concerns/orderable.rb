@@ -2,8 +2,8 @@ module Orderable
   extend ActiveSupport::Concern
 
   included do
-    def sort_column(usertg)
-      usertg.column_names.include?(params[:sort]) ? params[:sort] : ''
+    def sort_column(temp)
+      temp.column_names.include?(params[:sort]) ? params[:sort] : ''
       end
 
     def sort_direction

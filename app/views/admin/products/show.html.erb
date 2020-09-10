@@ -1,15 +1,18 @@
-<h2>Product ID: <%= @product.id %></h2>
-<p>
+<h2 class='text-primary'>PRODUCT ID: <%= @product.id %></h2><br/>
+<div class = 'container' >
   <strong>Name of Product:</strong>
-  <%= @product.title %>
-</p> <br/>
-<p>
+  <%= @product.title %><br/>
+  <hr/>
   <strong>Price of Product:</strong>
-  <%= @product.price %>
-</p> <br/>
-<p>
+  <%= @product.price %><br/>
+  <hr/>
   <strong>Description of Product:</strong>
-  <%= @product.description %>
-</p> <br/>
-  <%= link_to 'Back', admin_products_path, class: 'btn btn-primary' %>
-</p>
+  <%= @product.description %><br/>
+  <hr/>
+  <strong>Coupons with this product</strong><br/>
+  <% @product.coupons.each do |coupons| %>
+    <%= coupons.id %>
+    <%= coupons.name %><br/>
+  <% end %>
+  <hr/><br/><%= link_to 'Back', admin_products_path, class: 'btn btn-primary' %>
+</div>

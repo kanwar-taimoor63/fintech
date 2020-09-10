@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+  has_and_belongs_to_many :coupons, optional: true
   belongs_to :category
 
   def self.to_csv

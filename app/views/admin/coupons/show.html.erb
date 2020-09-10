@@ -1,6 +1,15 @@
-<h2>Coupon <%= @coupon.id %></h2>
+<h2 class='text-primary'>COUPON ID: <%= @coupon.id %></h2><br/>
+<div class = 'container' >
   <strong>Name of Coupon:</strong>
-  <%= @coupon.name %></p><br/>
+  <%= @coupon.name %><br/>
+  <hr/>
   <strong>Value of Coupon:</strong>
-  <%= @coupon.value %></p><br/>
-  <%= link_to 'Back', admin_coupons_path, class: 'btn btn-primary' %>
+  <%= @coupon.value %><br/>
+  <hr/>
+  <strong>Products with this coupon</strong><br/>
+  <% @coupon.products.each do |products| %>
+    <%= link_to products.id, admin_product_path(products) %>
+    <%= link_to products.title, admin_product_path(products) %><br/> 
+  <% end %> 
+  <hr/><br/><%= link_to 'Back', admin_coupons_path, class: 'btn btn-primary' %>
+</div>

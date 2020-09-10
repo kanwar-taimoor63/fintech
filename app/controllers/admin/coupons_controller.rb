@@ -1,21 +1,23 @@
 module Admin
   class CouponsController < Admin::BaseController
-    include Orderable
     before_action :set_coupons, only: %i[show edit destroy update]
-    helper_method :sort_column, :sort_direction
 
     def index
-      #@users = User.all
       @pagy, @coupons = pagy(Coupon.all, items: 5)
       respond_to do |format|
         format.html
         format.csv { send_data Coupon.all.to_csv, filename: "coupons-#{Date.today}.csv" }
       end
+
       if params[:search].present?
-       @pagy, @coupons =pagy( Coupon.search(params[:search]), items: 5)
-       @pagy, @coupons = pagy(@coupons.order(sort_column(@coupons) + ' ' + sort_direction), items: 5) if sort_column(@coupons).present? && sort_direction.present?   
+        @pagy, @coupons = pagy(Coupon.search(params[:search]), items: 5)
+        if sort_column(@coupons).present? && sort_direction.present?
+          @pagy, @coupons = pagy(@coupons.order(sort_column(@coupons) + ' ' + sort_direction), items: 5)
+        end
       else
-       @pagy, @coupons =pagy( Coupon.order(sort_column(@coupons) + ' ' + sort_direction), items: 5) if sort_column(@coupons).present? && sort_direction.present?
+        if sort_column(@coupons).present? && sort_direction.present?
+          @pagy, @coupons = pagy(Coupon.order(sort_column(@coupons) + ' ' + sort_direction), items: 5)
+        end
       end
     end
 
@@ -32,7 +34,7 @@ module Admin
       else
         render :new
       end
-      end
+    end
 
     def edit; end
 
@@ -44,7 +46,7 @@ module Admin
         render :edit
 
       end
-      end
+    end
 
     def destroy
       if @coupon.destroy
@@ -55,14 +57,14 @@ module Admin
       redirect_to admin_coupons_path
     end
 
-  private
+    private
 
     def set_coupons
       @coupon = Coupon.find(params[:id])
     end
 
     def coupon_params
-      params.require(:coupon).permit(:name, :value,:search)
+      params.require(:coupon).permit(:name, :value, :search, product_ids: [])
     end
   end
 end

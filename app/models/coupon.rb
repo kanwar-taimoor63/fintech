@@ -1,4 +1,6 @@
 class Coupon < ApplicationRecord
+  has_and_belongs_to_many :products
+  
   def self.search(search)
     where('coupons.name LIKE ? OR coupons.id LIKE ? OR coupons.value LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
   end
