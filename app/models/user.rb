@@ -5,13 +5,17 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   validates :password, password: true
   validates :username, uniqueness: { case_sensitive: false }
-  
+
   before_validation :add_username_in_db
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
   attr_writer :login
-  
+
+  def self.csv_attr
+    %w[id username email role]
+  end
+
   def self.search(search)
     return all if search.blank?
 

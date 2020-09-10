@@ -7,6 +7,11 @@ module Admin
       if sort_column(@users).present? && sort_direction.present?
         @pagyz, @users = pagy(@users.order(sort_column(@users) + ' ' + sort_direction), items: User::PER_PAGE)
       end
+
+      respond_to do |format|
+        format.html
+        format.csv { send_data User.all.to_csv, filename: "users-#{Date.today}.csv" }
+      end
     end
 
     def show; end
