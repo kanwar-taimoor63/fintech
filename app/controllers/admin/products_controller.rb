@@ -3,7 +3,7 @@ module Admin
     before_action :set_product, only: [:show, :edit, :update, :destroy]
 
     def index
-      @pagys, @products = pagy(Product.all, items: 5)
+      @pagys, @products = pagy(Product.all, items: PER_PAGE)
       respond_to do |format|
         format.html
         format.csv { send_data Product.all.to_csv, filename: "Products-#{Date.today}.csv" }
@@ -51,9 +51,7 @@ module Admin
     end
 
     def product_params
-      params.require(:product).permit(:title, :price, :description, :status, :category_id)
+      params.require(:product).permit(:title, :price, :description, :status, :category_id, coupon_ids:[])
     end
-
   end
 end
-

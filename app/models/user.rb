@@ -3,13 +3,13 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   validates :password, password: true
   validates :username, uniqueness: { case_sensitive: false }
-
+  
   before_validation :add_username_in_db
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
   attr_writer :login
-
+  
   def self.search(search)
     where('users.username LIKE ? || users.email LIKE ? || users.id LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
   end

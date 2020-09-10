@@ -3,7 +3,7 @@ module Admin
     before_action :set_category, only: %i[show edit destroy update]
 
     def index
-      @pagy, @category = pagy(Category.all, items: 5)
+      @pagy, @category = pagy(Category.all, items: PER_PAGE)
       respond_to do |format|
         format.html
         format.csv { send_data Category.all.to_csv, filename: "categories-#{Date.today}.csv" }
@@ -35,7 +35,7 @@ module Admin
         render :edit
 
       end
-      end
+    end
 
     def destroy
       if @category.destroy
@@ -46,7 +46,7 @@ module Admin
       redirect_to admin_categories_path
     end
 
-  private
+    private
 
     def set_category
       @category = Category.find(params[:id])
@@ -55,5 +55,6 @@ module Admin
     def category_params
       params.require(:category).permit(:name)
     end
+
   end
 end
