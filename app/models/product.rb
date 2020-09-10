@@ -14,7 +14,8 @@ class Product < ApplicationRecord
   end
 
   def self.search(search)
-    where('products.id LIKE ? || products.title LIKE ? || products.status LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
+    return all if search.blank?
+    where('products.id LIKE ? OR products.title LIKE ? OR products.status LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
   end
 
   STATUS = {

@@ -3,12 +3,9 @@ module Admin
     before_action :set_product, only: %i[show edit update destroy]
 
     def index
-      @pagys, @products = pagy(Product.all, items: 5)
-      if params[:search].present?
-        @pagys, @products = pagy(Product.search(params[:search]), items: 5)
-        @pagys, @products = pagy(@products.order(sort_column(@products) + ' ' + sort_direction), items: 5) if sort_column(@products).present? && sort_direction.present?
-      else
-        @pagys, @products = pagy(@products.order(sort_column(@products) + ' ' + sort_direction),items: 5) if sort_column(@products).present? && sort_direction.present?
+      @pagys, @products = pagy(Product.search(params[:search]), items: PER_PAGE)
+      if sort_column(@products).present? && sort_direction.present?
+        @pagys, @products = pagy(@products.order(sort_column(@products) + ' ' + sort_direction), items: PER_PAGE)
       end
 
       respond_to do |format|

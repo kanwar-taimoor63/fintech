@@ -14,7 +14,8 @@ class Category < ApplicationRecord
   end
 
   def self.search(search)
-    where('categories.id LIKE ? || categories.name LIKE ?', "%#{search}%", "%#{search}%")
+    return all if search.blank?
+    where('categories.id LIKE ? OR categories.name LIKE ?', "%#{search}%", "%#{search}%")
   end
 
 end

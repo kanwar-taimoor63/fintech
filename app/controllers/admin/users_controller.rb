@@ -5,12 +5,9 @@ module Admin
 
 
     def index
-      @pagyz, @users = pagy(User.client, items: 5)
-      if params[:search].present?
-        @pagyz, @users = pagy(@users.search(params[:search]),items: 5)
-        @pagyz, @users = pagy(@users.order(sort_column(@users) + ' ' + sort_direction), items: 5) if sort_column(@users).present? && sort_direction.present?
-      else
-        @pagyz, @users = pagy(@users.order(sort_column(@users) + ' ' + sort_direction), items: 5) if sort_column(@users).present? && sort_direction.present?
+      @pagyz, @users = pagy(User.client.search(params[:search]), items: PER_PAGE)
+      if sort_column(@users).present? && sort_direction.present?
+        @pagyz, @users = pagy(@users.order(sort_column(@users) + ' ' + sort_direction), items: PER_PAGE)
       end
     end
 
