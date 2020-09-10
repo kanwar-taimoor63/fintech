@@ -1,17 +1,8 @@
 class Category < ApplicationRecord
   has_many :products, dependent: :destroy
-  PER_PAGE = 5
 
-  def self.to_csv
-    attributes = %w[id name]
-
-    CSV.generate(headers: true) do |csv|
-      csv << attributes
-
-      find_each do |category|
-        csv << attributes.map { |attr| category.send(attr) }
-      end
-    end
+  def self.csv_attr
+    %w[id name]
   end
 
   def self.search(search)

@@ -9,11 +9,28 @@
   </head>
 
   <body>
-    <nav class='navbar'>
-      <%= link_to image_tag('logo.png'), root_path, class: 'navbar-logo' %>
+     
+    <nav class='flex-fill  navbar navbar-light bg-primary'>
+      <%= link_to root_path, class: 'bg-primary' do %>
+        <li class ='nav-item bg-primary text-center'>
+        <img src='/assets/logo2.png' width='50' height='50'>
+
+        </li>
+      <% end %>
+      <% if user_signed_in? %>
+        <div class ='text-right  text-white'>
+          <%= current_user.username %>
+          <%= link_to 'signout', destroy_user_session_path, method: 'delete', class:'btn btn-outline-light ' %>
+        </div>
+      <% else %>
+        <div class='float-left'>
+          <%= link_to 'Log in', new_user_session_path ,class:'btn btn-outline-light'%>
+          <%= link_to 'Sign up', new_user_registration_path,class:'btn btn-outline-light'%>
+        </div>
+      <% end %>
     </nav>
-    <div class="container">
-      <%= render 'layouts/alerts' %>
+    <div class='container'>
+      <br/><%= render 'layouts/alerts' %>
       <%= yield %>
     </div>
   </body>

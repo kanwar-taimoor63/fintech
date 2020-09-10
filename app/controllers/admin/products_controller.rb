@@ -5,7 +5,7 @@ module Admin
     def index
       @pagys, @products = pagy(Product.search(params[:search]), items: Product::PER_PAGE)
       if sort_column(@products).present? && sort_direction.present?
-        @pagys, @products = pagy(@products.order(sort_column(@products) + ' ' + sort_direction), items: PER_PAGE)
+        @pagys, @products = pagy(@products.order(sort_column(@products) + ' ' + sort_direction), items: Product::PER_PAGE)
       end
 
       respond_to do |format|
@@ -55,9 +55,7 @@ module Admin
     end
 
     def product_params
-      params.require(:product).permit(:title, :price, :description, :status, :category_id)
+      params.require(:product).permit(:title, :price, :description, :status, :category_id, coupon_ids:[])
     end
-
   end
 end
-

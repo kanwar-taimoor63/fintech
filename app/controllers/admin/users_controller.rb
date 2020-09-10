@@ -1,13 +1,11 @@
 module Admin
   class UsersController < Admin::BaseController
-
     before_action :set_user, only: %i[show edit destroy]
-
 
     def index
       @pagyz, @users = pagy(User.client.search(params[:search]), items: User::PER_PAGE)
       if sort_column(@users).present? && sort_direction.present?
-        @pagyz, @users = pagy(@users.order(sort_column(@users) + ' ' + sort_direction), items: PER_PAGE)
+        @pagyz, @users = pagy(@users.order(sort_column(@users) + ' ' + sort_direction), items: User::PER_PAGE)
       end
     end
 

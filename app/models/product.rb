@@ -1,17 +1,11 @@
 class Product < ApplicationRecord
+  has_and_belongs_to_many :coupons, optional: true
   belongs_to :category
-  PER_PAGE = 5
 
-  def self.to_csv
-    attributes = %w[id title]
-
-    CSV.generate(headers: true) do |csv|
-      csv << attributes
-
-      find_each do |product|
-        csv << attributes.map { |attr| product.send(attr) }
-      end
-    end
+  validates_associated :coupons
+  
+  def self.csv_attr
+    %w[id title]
   end
 
   def self.search(search)
@@ -21,10 +15,9 @@ class Product < ApplicationRecord
   end
 
   STATUS = {
-    publish: "publish",
-    draft: "draft",
-    pending: "pending"
+    publish: 'publish',
+    draft: 'draft',
+    pending: 'pending'
   }.freeze
   enum status: STATUS
-
 end
