@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'pages#home'
+  root 'products#index'
 
   authenticate :user, ->(user) { user.admin? } do
     namespace :admin do
@@ -11,9 +11,6 @@ Rails.application.routes.draw do
   end
 
   resources :products, only: %i[index show]
-  resources :pages, only: %i[home policy]
-
-
   get 'policy', to: 'pages#policy'
   devise_for :users, controllers: { registrations: 'registrations' }
 end
