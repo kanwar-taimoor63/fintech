@@ -2,3 +2,24 @@
   <%= link_to "Back", admin_users_path , class: 'btn btn-primary' %>
 </p>
 <h1> Edit User </h1>
+<div class = "row" >
+  <div class = "col-md-6">
+    <%= form_for( [:admin, @user], html: { method: :put }) do |f| %>
+      <div class= 'form-group' >
+        <%= f.text_field :firstname, class: 'form-control', placeholder: 'First Name'%><br/>
+        <%= f.text_field :lastname, class: 'form-control', placeholder: 'Last Name' %><br/>
+        <%= f.email_field :email, autocomplete: 'email', class: 'form-control', placeholder: 'Email',
+         required: true %> <br/>
+         <%= f.password_field :password, autocomplete: 'new-password', id: 'password', class: 'form-control', placeholder: 'Password'%>
+              <label class= 'less-imp-label' >Hint: The password should be at least eight characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ & ).</label><br/>
+              <%= f.password_field :password_confirmation, id: 'confirm_password', autocomplete: 'new-password', class: 'form-control',
+          placeholder: 'Confirm Password' %><br/>
+          <div id='message'>
+          </div>
+      </div>
+      <div class= 'actions text-center' >
+        <%= f.submit 'Edit User', id: 'submit', class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
