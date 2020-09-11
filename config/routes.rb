@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
-  resources :pages, only: %i[home policy]
-  root 'pages#home'
+  root 'products#index'
 
   authenticate :user, ->(user) { user.admin? } do
     namespace :admin do
-
       resources :users
       resources :categories
       resources :coupons
@@ -12,6 +10,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :products, only: %i[index show]
   get 'policy', to: 'pages#policy'
   devise_for :users, controllers: { registrations: 'registrations' }
 end

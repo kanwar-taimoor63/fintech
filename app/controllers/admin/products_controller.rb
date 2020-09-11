@@ -7,7 +7,6 @@ module Admin
       if sort_column(@products).present? && sort_direction.present?
         @pagys, @products = pagy(@products.order(sort_column(@products) + ' ' + sort_direction), items: Product::PER_PAGE)
       end
-
       respond_to do |format|
         format.html
         format.csv { send_data Product.all.to_csv, filename: "Products-#{Date.today}.csv" }
