@@ -1,18 +1,34 @@
 module Admin
   class UsersController < Admin::BaseController
     before_action :set_user, only: %i[show edit destroy]
-    
+
     def index
-      @users = User.client
-      if params[:search].present?
-        @users = @users.client.search(params[:search])
-        @users = @users.order(sort_column(@users) + ' ' + sort_direction) if sort_column(@users).present? && sort_direction.present?   
-      else
-        @users = @users.order(sort_column(@users) + ' ' + sort_direction) if sort_column(@users).present? && sort_direction.present?
+      @pagyz, @users = pagy(User.client.search(params[:search]), items: User::PER_PAGE)
+      if sort_column(@users).present? && sort_direction.present?
+        @pagyz, @users = pagy(@users.order(sort_column(@users) + ' ' + sort_direction), items: User::PER_PAGE)
+      end
+
+      respond_to do |format|
+        format.html
+        format.csv { send_data User.all.to_csv, filename: "users-#{Date.today}.csv" }
       end
     end
 
     def show; end
+
+    def new
+      @user = User.new
+    end
+
+    def create
+      @user = User.new(user_params.merge(confirmed_at: Time.zone.now, password: User::TEMP_PASSWORD))
+      if @user.save
+        redirect_to admin_users_path, notice: "User added"
+        @user.invite
+      else
+        render :new
+      end
+    end
 
     def edit; end
 

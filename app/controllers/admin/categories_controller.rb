@@ -3,7 +3,11 @@ module Admin
     before_action :set_category, only: %i[show edit destroy update]
 
     def index
-      @pagy, @category = pagy(Category.all, items: PER_PAGE)
+      @pagy, @categories = pagy(Category.search(params[:search]), items: Category::PER_PAGE)
+        if sort_column(@categories).present? && sort_direction.present?
+          @pagys, @categoriess = pagy(@categories.order(sort_column(@categories) + ' ' + sort_direction), items: Category::PER_PAGE)
+        end
+
       respond_to do |format|
         format.html
         format.csv { send_data Category.all.to_csv, filename: "categories-#{Date.today}.csv" }

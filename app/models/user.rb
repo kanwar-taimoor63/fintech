@@ -1,17 +1,25 @@
 class User < ApplicationRecord
+  include ActiveModel::Validations
+  TEMP_PASSWORD = "Password123!@#"
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   validates :password, password: true
   validates :username, uniqueness: { case_sensitive: false }
-  
+
   before_validation :add_username_in_db
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
   attr_writer :login
-  
+
+  def self.csv_attr
+    %w[id username email role]
+  end
+
   def self.search(search)
-    where('users.username LIKE ? || users.email LIKE ? || users.id LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
+    return all if search.blank?
+
+    where('users.username LIKE ? OR users.email LIKE ? OR users.id LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
   end
 
   def login
@@ -29,6 +37,10 @@ class User < ApplicationRecord
     elsif conditions.key?(:username) || conditions.key?(:email)
       where(conditions.to_hash).first
     end
+  end
+
+  def invite
+    WelcomeMailer.welcome_email(self).deliver_later
   end
 
   ROLES = {

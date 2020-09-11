@@ -1,0 +1,16 @@
+<div class = 'container' >
+  <div class= 'parsley-form user-sessions' >
+    <%= form_for [:admin, @user] do |f| %>
+    <%= render 'devise/shared/error_messages', resource: @user %>
+      <div class= 'form-group' >
+        <%= f.text_field :firstname, class: 'form-control', placeholder: 'First Name', required: true %><br/>
+        <%= f.text_field :lastname, class: 'form-control', placeholder: 'Last Name', required: true %><br/>
+        <%= f.email_field :email, autocomplete: 'email', class: 'form-control', placeholder: 'Email', required: true %><br/>
+        <label class= 'less-imp-label' > 'Password123!@#' will be sent as temporary password to the user</label><br/>
+        <%= f.submit 'Invite User', class: 'btn btn-primary' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+

@@ -3,16 +3,16 @@ module Admin
     before_action :set_coupons, only: %i[show edit destroy update]
 
     def index
-      @pagy, @coupons = pagy(Coupon.search(params[:search]), items: PER_PAGE)
+      @pagy, @coupons = pagy(Coupon.search(params[:search]), items: Coupon::PER_PAGE)
       if sort_column(@coupons).present? && sort_direction.present?
-      @pagy, @coupons= pagy(@coupons.order(sort_column(@coupons) + ' ' + sort_direction), items: PER_PAGE)
+      @pagy, @coupons= pagy(@coupons.order(sort_column(@coupons) + ' ' + sort_direction), items: Coupon::PER_PAGE)
       end
       respond_to do |format|
         format.html
         format.csv { send_data Coupon.all.to_csv, filename: "coupons-#{Date.today}.csv" }
       end
     end
-  
+
     def show; end
 
     def new

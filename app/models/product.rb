@@ -3,8 +3,15 @@ class Product < ApplicationRecord
   belongs_to :category
   validates_associated :coupons
   PRODUCT_STATUS='publish'
+  
   def self.csv_attr
     %w[id title]
+  end
+
+  def self.search(search)
+    return all if search.blank?
+
+    where('products.id LIKE ? OR products.title LIKE ? OR products.status LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
   end
 
   STATUS = {
