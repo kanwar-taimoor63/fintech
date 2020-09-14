@@ -9,8 +9,12 @@ Rails.application.routes.draw do
       resources :products
     end
   end
-
   resources :products, only: %i[index show]
+  resources :user do
+    resources :orders
+  end
+
   get 'policy', to: 'pages#policy'
+  get 'home', to: 'pages#home'
   devise_for :users, controllers: { registrations: 'registrations' }
 end

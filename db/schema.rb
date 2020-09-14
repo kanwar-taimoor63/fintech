@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_09_205207) do
+ActiveRecord::Schema.define(version: 2020_09_11_153550) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -32,6 +32,20 @@ ActiveRecord::Schema.define(version: 2020_09_09_205207) do
     t.bigint "products_id"
     t.index ["coupons_id"], name: "index_coupons_products_on_coupons_id"
     t.index ["products_id"], name: "index_coupons_products_on_products_id"
+  end
+
+  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.text "description"
+    t.string "payment_method"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.string "firstname", default: "", null: false
+    t.string "lastname", default: "", null: false
+    t.string "email", default: "", null: false
+    t.text "address"
+    t.string "number", default: "", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|

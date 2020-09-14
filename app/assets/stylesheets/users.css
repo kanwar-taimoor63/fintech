@@ -162,3 +162,12 @@ a {
   width: 20px ;
   height: 20px;
 }
+#customer-info-card {
+  display:none;
+}
+#payment-card {
+  display:none;
+}
+.dynamic_div {
+  display:none;
+}
