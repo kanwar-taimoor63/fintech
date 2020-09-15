@@ -44,7 +44,7 @@ module Admin
       else
         flash[:alert] = 'Unable to delete product'
       end
-      redirect_to admin_categories_path
+      redirect_to admin_products_path
     end
 
     private

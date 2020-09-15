@@ -9,11 +9,15 @@
             <h5 class='card-title text-uppercase'><%= product.category.name %></h5>
             <h4 class='card-title text-primary text-capitalize'><%= product.title %></h4>
             <h6 class='card-text'>$<%= product.price %></h6><hr/>
+            <%= form_for(@order_item,  remote: true) do |f| %>
+              <%= f.hidden_field :product_id, value: product.id %>
+          <div class="form-group">
+            <%= f.hidden_field :quantity, value: 1, min: 1, class: 'form-control' %>
+          </div>
             <div >
-              <%= link_to root_path do %>
                 <%=  image_tag('cart.png') %>
-                Add to cart
-              <% end %>
+                <%= f.submit "Add to cart", class: 'btn btn-primary btn-sm' %>
+            <% end %>
               <%= link_to product, class: 'float-right' do %>
                 <%=  image_tag('details.png',style: 'width 20px; height: 20px;')%>
                 Details

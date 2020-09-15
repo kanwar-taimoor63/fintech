@@ -7,4 +7,13 @@ module ApplicationHelper
     direction = column == sort_column(temp) && sort_direction == 'desc' ? 'asc' : 'desc'
     link_to title, { sort: column, direction: direction, search: params[:search] }, { class: 'text-white' }
   end
+
+  def current_order
+    if !session[:order_id].nil?
+      Order.find(session[:order_id])
+    else
+      Order.new
+    end
+  end
+
 end

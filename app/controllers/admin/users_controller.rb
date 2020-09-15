@@ -1,6 +1,6 @@
 module Admin
   class UsersController < Admin::BaseController
-    before_action :set_user, only: %i[show edit destroy]
+    before_action :set_user, only: %i[show edit update destroy]
 
     def index
       @pagyz, @users = pagy(User.client.search(params[:search]), items: User::PER_PAGE)
@@ -32,7 +32,13 @@ module Admin
 
     def edit; end
 
-    def update; end
+    def update
+      if @user.update!(user_params)
+        redirect_to [:admin, @user], notice: 'User was successfully updated.'
+      else
+        redirect_to [:admin, @user] , notice: @user.errors
+      end
+    end
 
     def destroy
       if @user.destroy
@@ -50,7 +56,12 @@ module Admin
     end
 
     def user_params
-      params.require(:user).permit(:firstname, :lastname, :email, :password, :search)
+      #byebug
+      if params[:user][:password].blank?
+        params.require(:user).permit(:firstname, :lastname, :email, :search)
+      else
+        params.require(:user).permit(:firstname, :lastname, :email, :password, :search)
+      end
     end
   end
 end

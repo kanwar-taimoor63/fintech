@@ -15,7 +15,7 @@ module Fintech
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
-    # WILL ADD MAIL CATCHER IN THE NEXT COMMIT 
+    # WILL ADD MAIL CATCHER IN THE NEXT COMMIT
     ActionMailer::Base.smtp_settings = {
       address: 'smtp.gmail.com',
       domain:  'mail.google.com',

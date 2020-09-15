@@ -1,17 +1,17 @@
 <div class ='container'>
   <div class='user-sessions'>
-    <div class='card-signin'>
-      <div class='login-heading' style= 'font-weight: lighter;'> 
-      <%= image_tag('login-icon.png', alt: 'img') %>
-       Login
+    <div class='card'>
+      <div class='card-header form-inline' style= 'font-weight: lighter;'>
+      <%#= image_tag('login-icon.png', alt: 'img') %>
+       <h2 class='ml-sm-1 mt-1 text-primary'>Login</h2>
       </div>
       <div class='card-body'>
         <div class='parsley-form'>
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
             <div class='form-group'>
-              <%= f.label :login , 'Username or Email', class: 'required no-transform label' %><br/> 
+              <%= f.label :login , 'Username or Email', class: 'required no-transform label' %><br/>
                 <%= f.text_field :login, class: 'form-control ', autofocus: true, required: true %>
-                <label class= 'less-imp-label'>Hint: username= firstname lastname</label>
+                <label class= 'font-weight-light'>Hint: username= firstname lastname</label>
             </div>
             <div class='form-group'>
               <%= f.label :password ,class: 'required no-transform label'%><br />
@@ -24,16 +24,19 @@
                   <%= f.label :remember_me %>
                 </div>
               <% end %>
-              <%= f.submit 'Log in' , class: 'btn btn-primary'%>
+              <div class='text-center'>
+              <%= f.submit 'Log in' , class: 'btn btn-primary'%><br/>
               <%= link_to 'Lost your password?', new_user_password_path,class: 'forget-link' %>
            </div>
+         </div>
           <% end %>
         </div>
       </div>
     </div>
   </div>
-  <div class='signup-btn'>
-  <label id='signup-btn-id' class='forget-link' data-turbolinks='false'>NEW TO FINTECH</label>
+  <br/>
+  <div class='signup-btn text-center'>
+  <label id='signup-btn-id' class='  badge badge-primary' data-turbolinks='false'>NEW TO FINTECH</label>
 </div>
   <br />
 </div>

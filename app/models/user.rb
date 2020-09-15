@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   include ActiveModel::Validations
   TEMP_PASSWORD = "Password123!@#"
+  #has_many :order, dependent: :destroy
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   validates :password, password: true
@@ -11,6 +13,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
   attr_writer :login
+
 
   def self.csv_attr
     %w[id username email role]

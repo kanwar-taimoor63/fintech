@@ -7,14 +7,14 @@
         <%= f.text_field :lastname, class: 'form-control', placeholder: 'Last Name', required: true %><br/>
         <%= f.email_field :email, autocomplete: 'email', class: 'form-control', placeholder: 'Email', required: true %><br/>
         <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control', placeholder: 'Password', required: true %>
-        <label class='less-imp-label'>Hint: The password should be at least eight characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ & ).</label><br/>
+        <label class='font-weight-light'>Hint: The password should be at least eight characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ & ).</label><br/>
         <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control', placeholder: 'Confirm Password', required: true %><br/>
-        <label class= 'less-imp-label' >Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our
+        <label class= 'font-weight-light' >Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our
         <%= link_to 'privacy policy ', policy_path %></label><br/>
         <div class= 'actions text-center' >
         <%= f.submit 'Sign up', class: 'btn btn-primary' %>
         </div>
-        
+
       </div>
     <% end %>
   </div>
