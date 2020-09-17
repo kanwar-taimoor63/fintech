@@ -1,8 +1,10 @@
 class Product < ApplicationRecord
+  validates_uniqueness_of :title
+  validates :title, :price, :status, presence: true
+  has_one_attached :image
   has_and_belongs_to_many :coupons, optional: true
   belongs_to :category
   has_many :order_items, dependent: :destroy
-  validates_associated :coupons
   PRODUCT_STATUS='publish'
 
   def self.csv_attr

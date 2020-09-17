@@ -4,7 +4,11 @@
     <% @products.each do |product| %>
       <div class='col-sm-4'>
         <div class='card' style='width: 18rem;'>
-          <img class='card-img-top' src='/assets/logo.png' alt='Card image cap'>
+          <% if product.image.attachment %>
+            <%= image_tag(product.image, class: 'card-img-top' ) %><br/>
+          <% else %>
+            <img class='card-img-top' src='/assets/logo.png' alt='Card image cap'>
+          <% end %>
           <div class='card-body'>
             <h5 class='card-title text-uppercase'><%= product.category.name %></h5>
             <h4 class='card-title text-primary text-capitalize'><%= product.title %></h4>
@@ -15,13 +19,13 @@
             <%= f.hidden_field :quantity, value: 1, min: 1, class: 'form-control' %>
           </div>
             <div >
-                <%=  image_tag('cart.png') %>
                 <%= f.submit "Add to cart", class: 'btn btn-primary btn-sm' %>
             <% end %>
-              <%= link_to product, class: 'float-right' do %>
-                <%=  image_tag('details.png',style: 'width 20px; height: 20px;')%>
-                Details
-              <% end %>
+              <%= link_to "Details", product %>
+              <%#class: 'float-right' do %>
+                <%#=  image_tag('details.png',style: 'width 20px; height: 20px;')%>
+
+              <%# end %>
             </div>
           </div>
         </div><br/>

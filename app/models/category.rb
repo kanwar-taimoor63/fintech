@@ -1,4 +1,6 @@
 class Category < ApplicationRecord
+  validates_uniqueness_of :name
+  validates :name, presence: true
   has_many :products, dependent: :destroy
   def self.csv_attr
     %w[id name]

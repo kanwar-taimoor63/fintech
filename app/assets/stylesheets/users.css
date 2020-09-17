@@ -5,8 +5,8 @@
   padding: 0px 15px;
   box-sizing: border-box;
   margin: 0 auto;
-}                       
-.user-sessions 
+}
+.user-sessions
 form .form-group {
   margin-bottom: 20px;
 }
@@ -51,42 +51,14 @@ form .form-group {
   color: #000000;
   font-weight: bold;
 }
-.btn-primary {
-  max-width: 350px;
-  width: 100%;
-  margin: 0 auto;
-  font-family: 'Roboto', sans-serif;
-  background: #90c9e8;
-  text-transform: uppercase;
-  color: #ffffff;
-  text-align: center;
-  font-weight: 400;
-  vertical-align: middle;
-  background-image: -webkit-gradient(linear, left bottom, left top, from(#5aabd6), to(#90c9e8));
-  background-image: linear-gradient(to top, #5aabd6, #90c9e8);
-  background-image: -webkit-linear-gradient(to top, #5aabd6, #90c9e8);
-  background-image: -moz-linear-gradient(to top, #5aabd6, #90c9e8);
-  background-image: -ms-linear-gradient(to top, #5aabd6, #90c9e8);
-  background-image: -o-linear-gradient(to top, #5aabd6, #90c9e8);
-  transition: all .2s;
-  border-width: 0;
-  border-style: solid;
-  border-color: #ffffff;
-  border-radius: 100px;
-  -webkit-border-radius: 100px;
-  -webkit-transition: all .2s;
-  -moz-transition: all .2s;
-  -ms-transition: all .2s;
-  -o-transition: all .2s;  
-  line-height: 17px;
-  font-size: 14px;
+.product-image{
+  width:400px;
+  height: 100px auto;
+
 }
-.btn {
-  text-align: center;
-  vertical-align: middle;
-  display: inline-block;
-  padding: 14px 18px;
-}
+
+
+
 .forgot-link {
   text-align: center;
   text-transform: uppercase;

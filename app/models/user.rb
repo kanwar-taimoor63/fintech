@@ -7,7 +7,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   validates :password, password: true
   validates :username, uniqueness: { case_sensitive: false }
-
+  validates :firstname, :lastname, presence:true
   before_validation :add_username_in_db
 
   devise :database_authenticatable, :registerable,

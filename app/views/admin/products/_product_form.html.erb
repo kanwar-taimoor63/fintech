@@ -1,18 +1,20 @@
 <%= form_with(model: product,url: [:admin, product], local: true) do |form| %>
   <%= render '/shared/error_msg', resource: product %>
   <div class='field form-group'>
-    <%= form.label :title, 'Product Name' %><br/>
-    <%= form.text_field :title, autofocus: true, required: true, placeholder: 'Name' %> <br/>
-    <%= form.label :price, 'Price' %> <br/>
-    <%= form.text_field :price, autofocus: true, required: true, placeholder: 'Price' %> <br/>
-    <%= form.label :description, 'Product Description' %> <br/>
-    <%= form.text_area :description, autofocus: true, placeholder: 'Description' %> <br/>
-    <%= form.label :category_id, 'Product Category' %> <br/>
-    <%= form.collection_select :category_id, Category.all, :id, :name, { prompt:'Please Select a Category' }, required: true %> <br/>
-    <%= form.label :status, 'Status' %> <br/>
-    <%= form.select :status, [Product::STATUS[:publish], Product::STATUS[:draft], Product::STATUS[:pending]], required: true %>
-     <label >Select coupon:</label><br/>
-    <%=form.collection_select:'coupon_ids', Coupon.all, :id, :name, { prompt:'Please Select a Coupon' }, { multiple: true }%>
+    <%= form.label :title, 'Product Name'  , class: 'label required'%><br/>
+    <%= form.text_field :title, autofocus: true, required: true, placeholder: 'Name', class: 'form-control col-md-6' %> <br/>
+    <%= form.label :price, 'Price', class: 'label required' %> <br/>
+    <%= form.text_field :price, autofocus: true, required: true, placeholder: 'Price', class: 'form-control col-md-6' %> <br/>
+    <%= form.label :image, 'Image', class: 'label' %><br/>
+    <%= form.file_field :image %><br/>
+    <%= form.label :description, 'Product Description', class: 'label' %> <br/>
+    <%= form.text_area :description, autofocus: true, placeholder: 'Description', class: 'form-control col-md-6' %> <br/>
+    <%= form.label :category_id, 'Product Category', class: 'label required' %> <br/>
+    <%= form.collection_select :category_id, Category.all, :id, :name, { prompt:'Please Select a Category' }, required: true, class: 'form-control col-md-6' %> <br/>
+    <%= form.label :status, 'Status', class: 'label required' %> <br/>
+    <%= form.select :status, [Product::STATUS[:publish], Product::STATUS[:draft], Product::STATUS[:pending]], required: true, class: 'form-control col-md-6' %><br/>
+     <label ><strong> Select coupon: </strong></label><br/>
+    <%=form.collection_select:'coupon_ids', Coupon.all, :id, :name, {  }, { multiple: true, class: 'form-control col-md-6'}%>
   </div><br/>
   <div class='actions'>
     <%= form.submit 'Add Product', class: 'btn btn-primary' %>
