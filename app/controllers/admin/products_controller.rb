@@ -3,9 +3,9 @@ module Admin
     before_action :set_product, only: %i[show edit update destroy]
 
     def index
-      @pagys, @products = pagy(Product.search(params[:search]), items: Product::PER_PAGE)
+      @pagy, @products = pagy(Product.search(params[:search]), items: Product::PER_PAGE)
       if sort_column(@products).present? && sort_direction.present?
-        @pagys, @products = pagy(@products.order(sort_column(@products) + ' ' + sort_direction), items: Product::PER_PAGE)
+        @pagy, @products = pagy(@products.order(sort_column(@products) + ' ' + sort_direction), items: Product::PER_PAGE)
       end
       respond_to do |format|
         format.html
@@ -50,11 +50,15 @@ module Admin
     private
 
     def set_product
-      @product = Product.find(params[:id])
+      @product = begin
+                  Product.find(params[:id])
+                rescue StandardError
+                  nil
+                end
     end
 
     def product_params
-      params.require(:product).permit(:title, :price, :description, :status, :category_id, coupon_ids:[])
+      params.require(:product).permit(:title, :price, :description, :status, :category_id)
     end
   end
 end

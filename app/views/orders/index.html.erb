@@ -1,0 +1,40 @@
+<% if @orders.empty? %>
+  <p class='alert alert-danger text-center'>No Orders to show</p>
+<% else %>
+  <h2> Your Orders </h2><br>
+  <% @orders.all.each do |order| %>
+  <div class='card '>
+    <h4 class='card-header text-primary'>Order Id# <%= order.id %></h4>
+    <div class='card-body'>
+      <strong> first name:</strong> <%= order.firstname %><br/>
+      <strong>last name: </strong><%= order.lastname %><br/>
+      <strong>email: </strong> <%= order.email %><br/>
+      <strong> address:</strong> <%= order.address %><br/>
+      <strong> subtotal: </strong> $<%= order.subtotal %><br/>
+      <table class='table table-striped  table-hover text-center'>
+        <thead>
+          <tr>
+            <th> ID </th>
+            <th> Product</th>
+            <th> Unit Price</th>
+            <th> Quantity</th>
+            <th> Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% order.order_items.each do |ord| %>
+            <tr>
+              <td><%= ord.id %></td>
+              <td><%= ord.product.title %></td>
+              <td><%= ord.product.price %></td>
+              <td><%= ord.quantity %></td>
+              <td><%= ord.total_price %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>  
+  <br/>
+  <% end %>
+<% end %>

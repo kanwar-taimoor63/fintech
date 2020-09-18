@@ -1,41 +1,45 @@
-<p>
-  <%= link_to "Back", admin_users_path , class: 'btn btn-primary' %>
-</p>
-<div class="col-lg-8 order-lg-2">
-  <ul class="nav nav-tabs">
-    <li class="nav-item">
-      <%= link_to "User Profile", admin_user_path, class: "nav-link active " %>
-    </li>
-  </ul>
-  <div class="tab-content py-4">
-    <div class="row">
-      <div class="col-md-12">
-        <table class="table table-sm table-hover table-striped">
-          <tbody>
-            <tr>
-              <td>
-                <strong> FullName: </strong>
-                <%= @user.firstname %> <%= @user.lastname %>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <strong> Email: </strong> <%= @user.email %>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <strong> Role: </strong> <%= User::ROLES[:client] %>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <strong> Account Created At: </strong> <%= @user.created_at %>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+<% if @user %>
+  <p>
+    <%= link_to 'Back', admin_users_path , class: 'btn btn-primary' %>
+  </p>
+  <div class='col-lg-8 order-lg-2'>
+    <ul class='nav nav-tabs'>
+      <li class='nav-item'>
+        <%= link_to 'User Profile', admin_user_path, class: 'nav-link active ' %>
+      </li>
+    </ul>
+    <div class='tab-content py-4'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <table class='table table-sm table-hover table-striped'>
+            <tbody>
+              <tr>
+                <td>
+                  <strong> FullName: </strong>
+                  <%= @user.firstname %> <%= @user.lastname %>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong> Email: </strong> <%= @user.email %>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong> Role: </strong> <%= User::ROLES[:client] %>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong> Account Created At: </strong> <%= @user.created_at %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<% else %>
+  <%= render :file => '../../public/404.html',  :status => 404 %>
+<% end %>

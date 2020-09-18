@@ -3,9 +3,9 @@ module Admin
     before_action :set_user, only: %i[show edit update destroy]
 
     def index
-      @pagyz, @users = pagy(User.client.search(params[:search]), items: User::PER_PAGE)
+      @pagy, @users = pagy(User.client.search(params[:search]), items: User::PER_PAGE)
       if sort_column(@users).present? && sort_direction.present?
-        @pagyz, @users = pagy(@users.order(sort_column(@users) + ' ' + sort_direction), items: User::PER_PAGE)
+        @pagy, @users = pagy(@users.order(sort_column(@users) + ' ' + sort_direction), items: User::PER_PAGE)
       end
 
       respond_to do |format|
@@ -34,7 +34,7 @@ module Admin
 
     def update
       if @user.update!(user_params)
-        redirect_to [:admin, @user], notice: 'User was successfully updated.'
+        redirect_to admin_users_path, notice: 'User was successfully updated.'
       else
         redirect_to [:admin, @user] , notice: @user.errors
       end
@@ -52,11 +52,14 @@ module Admin
     private
 
     def set_user
-      @user = User.find(params[:id])
+      @user = begin
+                User.find(params[:id])
+              rescue StandardError
+                nil
+              end
     end
 
     def user_params
-      #byebug
       if params[:user][:password].blank?
         params.require(:user).permit(:firstname, :lastname, :email, :search)
       else

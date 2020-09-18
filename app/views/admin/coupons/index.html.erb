@@ -19,20 +19,26 @@
       </tr>
     </thead>
     <tbody>
-      <% @coupons.each do |coupon| %>
-        <tr>
-          <td><%= coupon.id %></td>
-          <td><%= coupon.name %></td>
-          <td><%= coupon.value %></td>
-          <td>
-            <%= link_to 'Show', [:admin,coupon ], class: 'btn btn-primary' %>
-            <%= link_to 'Edit', [:edit, :admin, coupon], class: 'btn btn-primary' %>
-            <%= link_to 'Destroy', [:admin, coupon], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %>
-          </td>
-        </tr>
+      <% if @coupons.empty? %>
+        <p class='alert alert-danger text-center'>No coupons to show</p>
+      <% else %>
+        <% @coupons.each do |coupon| %>
+          <tr>
+            <td><%= coupon.id %></td>
+            <td><%= coupon.name %></td>
+            <td><%= coupon.value %></td>
+            <td>
+              <%= link_to 'Show', [:admin,coupon ], class: 'btn btn-primary' %>
+              <%= link_to 'Edit', [:edit, :admin, coupon], class: 'btn btn-primary' %>
+              <%= link_to 'Destroy', [:admin, coupon], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>
 </div>
 <br>
-<%= pagy_bootstrap_nav(@pagy).html_safe %>
+<% if @pagy.count > Coupon::PER_PAGE %>
+  <%= pagy_bootstrap_nav(@pagy).html_safe %>
+<% end %>

@@ -1,9 +1,9 @@
 <div class ='container'>
   <div class='user-sessions'>
     <div class='card'>
-      <div class='card-header form-inline' style= 'font-weight: lighter;'>
-      <%#= image_tag('login-icon.png', alt: 'img') %>
-       <h2 class='ml-sm-1 mt-1 text-primary'>Login</h2>
+      <div class='card-header bg-primary form-inline' style= 'font-weight: lighter;'>
+      <%= image_tag('login-icon.png', alt: 'img') %>
+       <h2 class='ml-sm-1 mt-1 text-white'>Login</h2>
       </div>
       <div class='card-body'>
         <div class='parsley-form'>
@@ -11,10 +11,10 @@
             <div class='form-group'>
               <%= f.label :login , 'Username or Email', class: 'required no-transform label' %><br/>
                 <%= f.text_field :login, class: 'form-control ', autofocus: true, required: true %>
-                <label class= 'font-weight-light'>Hint: username= firstname lastname</label>
+                <label class= 'font-weight-light hint'>Hint: username= firstname lastname</label>
             </div>
             <div class='form-group'>
-              <%= f.label :password ,class: 'required no-transform label'%><br />
+              <%= f.label :password, class: 'required no-transform label' %><br />
               <%= f.password_field :password, class: 'form-control', autocomplete: 'current-password', required: true %>
             </div>
             <div class='bottom-grid'>
@@ -25,8 +25,8 @@
                 </div>
               <% end %>
               <div class='text-center'>
-              <%= f.submit 'Log in' , class: 'btn btn-primary'%><br/>
-              <%= link_to 'Lost your password?', new_user_password_path,class: 'forget-link' %>
+              <%= f.submit 'Log in' , class: 'btn btn-signin btn-primary'%><br/>
+              <%= link_to 'Lost your password?', new_user_password_path, class: 'forget-link' %>
            </div>
          </div>
           <% end %>

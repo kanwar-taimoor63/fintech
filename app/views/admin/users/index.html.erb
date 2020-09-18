@@ -1,9 +1,9 @@
 <h2>Clients</h2>
 <div class='form-inline'>
   <%= link_to 'New User', new_admin_user_path, class: 'btn btn-primary' %><hr/>
- <%= form_with method: :get, local: true do |f| %>
-  <%= f.text_field :search,value: params[:search], class:'form-control' %>
-  <%= f.submit 'search',class: 'btn btn-primary' %>
+  <%= form_with method: :get, local: true do |f| %>
+    <%= f.text_field :search,value: params[:search], class:'form-control' %>
+    <%= f.submit 'search', class: 'btn btn-primary' %>
   <% end %><hr/>
   <%= link_to 'Export', admin_users_path(format: :csv), class: 'btn btn-primary' %>
 </div>
@@ -19,29 +19,34 @@
     </tr>
   </thead>
   <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <th scope='row'>
-          <%= user.id %>
-        </th>
-  	    <td>
-          <%= user.username %>
-        </td>
-        <td>
-          <%= user.email %>
-        </td>
-        <td>
-          <%= User::ROLES[:client] %>
-        </td>
-  	    <td>
-  	      <%= link_to 'Show ', [:admin, user], class: 'btn btn-primary' %>
-  	      <%= link_to 'Edit ', [:edit, :admin, user], class: 'btn btn-primary' %>
-  	      <%= link_to 'Delete ', [:admin, user], class: 'btn btn-primary' , data: { confirm: 'Are you sure?' },
-              method: :delete %>
-  	    </td>
-      </tr>
+    <% if @users.empty? %>
+      <p class='alert alert-danger text-center'>No Users to show</p>
+    <% else %>
+      <% @users.each do |user| %>
+        <tr>
+          <th scope='row'>
+            <%= user.id %>
+          </th>
+    	    <td>
+            <%= user.username %>
+          </td>
+          <td>
+            <%= user.email %>
+          </td>
+          <td>
+            <%= User::ROLES[:client] %>
+          </td>
+    	    <td>
+    	      <%= link_to 'Show', [:admin, user], class: 'btn btn-primary' %>
+    	      <%= link_to 'Edit', [:edit, :admin, user], class: 'btn btn-primary' %>
+    	      <%= link_to 'Delete', [:admin, user], class: 'btn btn-primary' , data: { confirm: 'Are you sure?' },
+                method: :delete %>
+    	    </td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
-<%= pagy_bootstrap_nav(@pagyz).html_safe %>
-
+<% if @pagy.count > User::PER_PAGE %>
+  <%= pagy_bootstrap_nav(@pagy).html_safe %>
+<% end %>

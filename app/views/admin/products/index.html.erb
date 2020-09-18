@@ -14,27 +14,33 @@
       <tr>
         <th ><%= sortable 'id', @products %></th>
         <th ><%= sortable 'title', @products %></th>
-        <th ><%= sortable ':price', @products %></th>
+        <th ><%= sortable 'price', @products %></th>
         <th ><%= sortable 'status', @products %></th>
         <th colspan='3'> Actions</th>
       </tr>
     </thead>
     <tbody>
-      <% @products.each do |product| %>
-        <tr>
-          <td><%= product.id %></td>
-          <td><%= product.title %></td>
-          <td><%= product.price %></td>
-          <td><%= product.status %></td>
-          <td>
-            <%= link_to 'Show', [:admin,product], class: 'btn btn-primary' %>
-            <%= link_to 'Edit', [:edit, :admin, product], class: 'btn btn-primary' %>
-            <%= link_to 'Destroy', [:admin, product], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %>
-          </td>
-        </tr>
+      <% if @products.empty? %>
+        <p class='alert alert-danger text-center'>No products to show</p>
+      <% else %>
+        <% @products.each do |product| %>
+          <tr>
+            <td><%= product.id %></td>
+            <td><%= product.title %></td>
+            <td><%= product.price %></td>
+            <td><%= product.status %></td>
+            <td>
+              <%= link_to 'Show', [:admin,product], class: 'btn btn-primary' %>
+              <%= link_to 'Edit', [:edit, :admin, product], class: 'btn btn-primary' %>
+              <%= link_to 'Destroy', [:admin, product], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>
 </div>
 <br>
-<%= pagy_bootstrap_nav(@pagys).html_safe %>
+<% if @pagy.count > Product::PER_PAGE %>
+  <%= pagy_bootstrap_nav(@pagy).html_safe %>
+<% end %>

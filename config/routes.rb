@@ -14,10 +14,6 @@ Rails.application.routes.draw do
   resources :order_items
   resource :carts, only: [:show]
   resources :orders
-  resources :user do
-
-  end
-
   get 'policy', to: 'pages#policy'
   devise_for :users, controllers: { registrations: 'registrations' }
 end

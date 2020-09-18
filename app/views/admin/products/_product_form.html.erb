@@ -6,13 +6,13 @@
     <%= form.label :price, 'Price' %> <br/>
     <%= form.text_field :price, autofocus: true, required: true, placeholder: 'Price' %> <br/>
     <%= form.label :description, 'Product Description' %> <br/>
-    <%= form.text_area :description, autofocus: true, placeholder: 'Description' %> <br/>
+    <%= form.text_area :description, autofocus: true, placeholder: 'Description', class: 'ckeditor' %> 
+    <br/>
     <%= form.label :category_id, 'Product Category' %> <br/>
     <%= form.collection_select :category_id, Category.all, :id, :name, { prompt:'Please Select a Category' }, required: true %> <br/>
     <%= form.label :status, 'Status' %> <br/>
-    <%= form.select :status, [Product::STATUS[:publish], Product::STATUS[:draft], Product::STATUS[:pending]], required: true %>
-     <label >Select coupon:</label><br/>
-    <%=form.collection_select:'coupon_ids', Coupon.all, :id, :name, { prompt:'Please Select a Coupon' }, { multiple: true }%>
+    <%= form.select :status, [Product::STATUS[:publish], Product::STATUS[:draft], Product::STATUS[:pending]], required: true %><br/>
+     
   </div><br/>
   <div class='actions'>
     <%= form.submit 'Add Product', class: 'btn btn-primary' %>

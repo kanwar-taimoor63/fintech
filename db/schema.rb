@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_15_112645) do
+ActiveRecord::Schema.define(version: 2020_09_15_171330) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -47,16 +47,17 @@ ActiveRecord::Schema.define(version: 2020_09_15_112645) do
   end
 
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.decimal "subtotal", precision: 10, scale: 2
+    t.text "description"
+    t.string "payment_method"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.text "description"
-    t.string "payment_method", default: "", null: false
     t.string "firstname", default: "", null: false
     t.string "lastname", default: "", null: false
     t.string "email", default: "", null: false
     t.text "address"
+    t.string "number", default: "", null: false
+    t.decimal "subtotal", precision: 10, scale: 2
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -95,6 +96,5 @@ ActiveRecord::Schema.define(version: 2020_09_15_112645) do
   add_foreign_key "coupons_products", "products", column: "products_id"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
-  add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
 end

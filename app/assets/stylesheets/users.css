@@ -1,28 +1,10 @@
 .user-sessions {
-  font-family: 'Raleway', sans-serif;
   max-width: 605px;
   width: 100%;
   padding: 0px 15px;
   box-sizing: border-box;
   margin: 0 auto;
 }                       
-.user-sessions 
-form .form-group {
-  margin-bottom: 20px;
-}
-.card-signin {
-  padding: 0;
-  background: white;
-  border: 1px solid #e0dede;
-}
-.login-heading {
-  background-color: #d5dadc;
-  color: #2e4851;
-  font-size: 32px;
-  font-weight: 400;
-  padding: 5px 10px;
-  display: flex;
-}
 .required:after {
   content: ' *';
   font-size: 15px;
@@ -30,6 +12,9 @@ form .form-group {
 .required::after {
   font-size: 20px;
   line-height: 20px;
+}
+.btn-signin {
+  min-width: 200px
 }
 *::after {
   box-sizing: border-box;
@@ -42,56 +27,14 @@ form .form-group {
   justify-content: center;
   align-items: center;
 }
-.form-check {
-  padding-left: 0;
-  padding-top: 6px;
-}
 .label {
   font-size: 16px;
-  color: #000000;
+  text-transform: uppercase;
+  color: #333333;
   font-weight: bold;
 }
-.btn-primary {
-  max-width: 350px;
-  width: 100%;
-  margin: 0 auto;
-  font-family: 'Roboto', sans-serif;
-  background: #90c9e8;
-  text-transform: uppercase;
-  color: #ffffff;
-  text-align: center;
-  font-weight: 400;
-  vertical-align: middle;
-  background-image: -webkit-gradient(linear, left bottom, left top, from(#5aabd6), to(#90c9e8));
-  background-image: linear-gradient(to top, #5aabd6, #90c9e8);
-  background-image: -webkit-linear-gradient(to top, #5aabd6, #90c9e8);
-  background-image: -moz-linear-gradient(to top, #5aabd6, #90c9e8);
-  background-image: -ms-linear-gradient(to top, #5aabd6, #90c9e8);
-  background-image: -o-linear-gradient(to top, #5aabd6, #90c9e8);
-  transition: all .2s;
-  border-width: 0;
-  border-style: solid;
-  border-color: #ffffff;
-  border-radius: 100px;
-  -webkit-border-radius: 100px;
-  -webkit-transition: all .2s;
-  -moz-transition: all .2s;
-  -ms-transition: all .2s;
-  -o-transition: all .2s;  
-  line-height: 17px;
-  font-size: 14px;
-}
-.btn {
-  text-align: center;
-  vertical-align: middle;
-  display: inline-block;
-  padding: 14px 18px;
-}
-.forgot-link {
-  text-align: center;
-  text-transform: uppercase;
-  transition: color .3s;
-  color: #67b7e1;
+.hint{
+  font-size:12px ;
 }
 a {
   text-align: center;
@@ -100,14 +43,6 @@ a {
   -webkit-transition: color .3s;
   transition: color .3s;
   color: #67b7e1;
-}
-.login-heading {
-  background-color: #d5dadc;
-  color: #2e4851;
-  font-size: 32px;
-  font-weight: 400;
-  padding: 5px 10px;
-  display: flex;
 }
 .login-heading img {
   margin-right: 10px;
@@ -119,7 +54,7 @@ a {
   display:none;
 }
 .signup-btn {
-  margin-top: 30px;
+  margin-top: 90px;
   align-items: center;
   border-bottom: 1px solid #e0dede;
   display: flex;
@@ -135,30 +70,8 @@ a {
   font-style: normal;
 }
 .signup-btn label:hover {
-  color: #67b7e1;
+  color: #007bff;
 }
-.less-imp-label {
-  color: #808080;
-  font-size: 12px;
-}
-.pretty th .current {
-  padding-right: 12px;
-  color: #fff;
-  background-repeat: no-repeat;
-  background-position: right center;
-}
-.pretty th .asc {
-
-  background-color: #fff;
-}
-.pretty th .desc {
-  background-color: #000;
-}
-.navbar-brand {
-  max-height: 50px;
-}
-.logo-img-style {
-  margin-top: -30px;
-  width: 20px ;
-  height: 20px;
+.hide{
+  display: none;
 }

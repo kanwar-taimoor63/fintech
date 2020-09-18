@@ -2,8 +2,10 @@ class Product < ApplicationRecord
   has_and_belongs_to_many :coupons, optional: true
   belongs_to :category
   has_many :order_items, dependent: :destroy
-  validates_associated :coupons
-  PRODUCT_STATUS='publish'
+  validates :description, length: { maximum: 60_000 }
+  validates :title, :status, presence: true, length: { maximum: 250 }
+  validates :price, presence: true, format: { with: /\A\d+(?:\.\d{0,2})?\z/ }, numericality: { greater_than: 0, less_than: 100_000_000 }
+  PRODUCT_STATUS = 'publish'.freeze
 
   def self.csv_attr
     %w[id title]
