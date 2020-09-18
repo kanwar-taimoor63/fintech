@@ -1,18 +1,6 @@
 <% if @order %>
   <div class='card'>
-    <h4 class='card-header text-success'>Order Summary</h4>
-  </div>
-  <br/>
-  <div class='card'>
-    <h4 class='card-header text-success'>Customer Information</h4>
-  </div>
-  <br/>
-  <div class='card'>
-    <h4 class='card-header text-success'>Payment Information</h4>
-  </div>
-  <br/>
-  <div class='card'>
-    <h4 class='card-header text-primary'>Confirmation</h4>
+    <h4 class='card-header text-primary'>Summary</h4>
     <div id='confirmation-card'>
       <div class='card-body'>
         <h2 class='card-title'>Order No. <%= @order.id %></h2><br/>
