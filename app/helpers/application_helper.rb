@@ -10,7 +10,12 @@ module ApplicationHelper
 
   def current_order
     if session[:order_id].present?
-      Order.find(session[:order_id])
+      begin
+        Order.find(session[:order_id])
+      rescue StandardError
+        Order.new
+      end
+      
     else
       Order.new
     end

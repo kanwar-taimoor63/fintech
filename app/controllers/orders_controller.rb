@@ -23,6 +23,7 @@ class OrdersController < ApplicationController
   end
 
   def create
+    byebug
     @order = @order.update(order_params)
     if @order.save
       redirect_to root_path, notice: 'Order was successfully placed'
@@ -32,8 +33,10 @@ class OrdersController < ApplicationController
   end
 
   def update
+    byebug
     @order.user_id = current_user.id
     if @order.update!(order_params)
+      byebug
       session[:order_id] = nil
       render :show
     else
@@ -69,7 +72,7 @@ class OrdersController < ApplicationController
       end
     end
     @total_price = 0.0 if @total_price < 0
-    @order.update_columns(subtotal: @total_price)
+    @order.update_columns(subtotal: @total_price, user_id: @user.id)
   end
 
   def set_user_fields_for_order
