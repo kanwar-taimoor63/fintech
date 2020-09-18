@@ -1,4 +1,5 @@
 class Category < ApplicationRecord
+
   validates :name, presence: true, length: { maximum: 250 }, uniqueness: { case_sensitive: false }
   has_many :products, dependent: :destroy
   def self.csv_attr

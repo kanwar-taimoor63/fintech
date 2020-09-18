@@ -7,7 +7,11 @@
       <% @products.each do |product| %>
         <div class='col-sm-4'>
           <div class='card' style='width: 18rem;'>
+            <% if product.image.attachment %>
+            <%= image_tag(product.image, class: 'card-img-top' ) %><br/>
+          <% else %>
             <img class='card-img-top' src='/assets/logo.png' alt='Card image cap'>
+          <% end %>
             <div class='card-body'>
               <h5 class='card-title text-uppercase'><%= product.category.name %></h5>
               <h4 class='card-title text-primary text-capitalize'><%= product.title %></h4>
