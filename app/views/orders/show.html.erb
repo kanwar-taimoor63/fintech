@@ -1,0 +1,79 @@
+<% if @order %>
+  <div class='card'>
+    <h4 class='card-header text-success'>Order Summary</h4>
+  </div>
+  <br/>
+  <div class='card'>
+    <h4 class='card-header text-success'>Customer Information</h4>
+  </div>
+  <br/>
+  <div class='card'>
+    <h4 class='card-header text-success'>Payment Information</h4>
+  </div>
+  <br/>
+  <div class='card'>
+    <h4 class='card-header text-primary'>Confirmation</h4>
+    <div id='confirmation-card'>
+      <div class='card-body'>
+        <h2 class='card-title'>Order No. <%= @order.id %></h2><br/>
+        <h5 class='card-title'>Product Details</h5><hr/>
+          <div class='row'>
+            <div class='col'>
+              <table class='table table-borderless'>
+                <thead>
+                  <tr>
+                    <th> Product</th>
+                    <th> Unit Price</th>
+                    <th> Quantity</th>
+                    <th> Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @order.order_items.each do |ord| %>
+                    <tr>
+                      <td><%= ord.product.title %></td>
+                      <td><%= ord.product.price %></td>
+                      <td><%= ord.quantity %></td>
+                      <td><%= ord.total_price %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        <h5 class='card-title'>User Details</h5><hr/>
+          <div class='row'>
+            <div class='col'>
+              <%= label_tag 'First Name: ', nil, class: 'no-transform label' %>
+              <%= @order.firstname %>
+            </div>
+            <div class='col'>
+              <%= label_tag 'Last Name: ', nil, class: 'no-transform label' %>
+              <%= @order.lastname %>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col'>
+              <%= label_tag 'Email: ', nil, class: 'no-transform label' %>
+              <%= @order.email %>
+            </div>
+            <div class='col'>
+              <%= label_tag 'Address: ', nil, class: 'no-transform label' %>
+              <%= @order.address %>
+            </div>
+          </div>
+          <%= label_tag 'Payment Method: ', nil, class: 'no-transform label' %>
+          <%= @order.payment_method %><br/><br/>
+          <h5 class='card-title'>Bill</h5><hr/>
+          <%= label_tag 'Total Price: ', nil, class: 'no-transform label' %>
+          $<%= @order.subtotal %>  
+          <%= link_to 'Done', root_path, notice:'Order was Successfully Placed', class: 'btn btn-primary float-right' %><br/>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  <br/>
+<% else %>
+  <%= render :file => '../../public/404.html',  :status => 404 %>
+<% end %>

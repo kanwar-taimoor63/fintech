@@ -7,7 +7,6 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
     <nav class='flex-fill  navbar navbar-light bg-primary'>
       <%= link_to root_path, class: 'bg-primary' do %>
@@ -15,19 +14,17 @@
         <img src='/assets/logo2.png' width='50' height='50'>
         </li>
       <% end %>
-       <ul class="nav navbar-nav navbar-right">
-        <li class="active cart text-white"><%= render 'layouts/cart' %></li>
+       <ul class='nav navbar-nav navbar-right'>
+        <li class='active cart text-white'><%= render 'layouts/cart' %></li>
         </ul>
       <% if user_signed_in? %>
-
         <div class ='text-right  text-white'>
           <%= current_user.username %>
-          <%= link_to 'signout', destroy_user_session_path, method: 'delete', class:'btn btn-outline-light ' %>
+          <%= link_to 'signout', destroy_user_session_path, method: 'delete', class: 'btn btn-outline-light' %>
         </div>
       <% else %>
         <div class='float-left'>
-          <%= link_to 'Log in', new_user_session_path ,class:'btn btn-outline-light'%>
-          <%= link_to 'Sign up', new_user_registration_path,class:'btn btn-outline-light'%>
+          <%= link_to 'Log in / Sign up', new_user_session_path, class: 'btn btn-outline-light' %>
         </div>
       <% end %>
     </nav>

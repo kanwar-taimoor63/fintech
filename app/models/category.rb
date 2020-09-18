@@ -1,6 +1,6 @@
 class Category < ApplicationRecord
-  validates_uniqueness_of :name
-  validates :name, presence: true
+
+  validates :name, presence: true, length: { maximum: 250 }, uniqueness: { case_sensitive: false }
   has_many :products, dependent: :destroy
   def self.csv_attr
     %w[id name]
@@ -11,5 +11,4 @@ class Category < ApplicationRecord
 
     where('categories.id LIKE ? OR categories.name LIKE ?', "%#{search}%", "%#{search}%")
   end
-
 end

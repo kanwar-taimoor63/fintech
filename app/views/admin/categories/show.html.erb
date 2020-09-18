@@ -1,6 +1,10 @@
-<h2 class='text-primary'>Category <%= @category.id %></h2><br/>
-<p>
-  <strong>Name of Category:</strong>
-  <%= @category.name %></p><br/><hr/>
-  <%= link_to 'Back', admin_categories_path, class: 'btn btn-primary' %>
-</p>
+<% if @category %>
+  <h2 class='text-primary'>Category <%= @category.id %></h2><br/>
+  <p>
+    <strong>Name of Category:</strong>
+    <%= @category.name %></p><br/><hr/>
+    <%= link_to 'Back', admin_categories_path, class: 'btn btn-primary' %>
+  </p>
+<% else %>
+  <%= render :file => '../../public/404.html',  :status => 404 %>
+<% end %>

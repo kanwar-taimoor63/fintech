@@ -1,36 +1,42 @@
-<h3>Products</h3>
-<div class='container'>
-  <div class='row'>
-    <% @products.each do |product| %>
-      <div class='col-sm-4'>
-        <div class='card' style='width: 18rem;'>
-          <% if product.image.attachment %>
+<% if @products.empty? %>
+  <p class='alert alert-danger text-center'>No products to show</p>
+<% else %>
+  <h3>Products</h3>
+  <div class='container'>
+    <div class='row'>
+      <% @products.each do |product| %>
+        <div class='col-sm-4'>
+          <div class='card' style='width: 18rem;'>
+            <% if product.image.attachment %>
             <%= image_tag(product.image, class: 'card-img-top' ) %><br/>
           <% else %>
             <img class='card-img-top' src='/assets/logo.png' alt='Card image cap'>
           <% end %>
-          <div class='card-body'>
-            <h5 class='card-title text-uppercase'><%= product.category.name %></h5>
-            <h4 class='card-title text-primary text-capitalize'><%= product.title %></h4>
-            <h6 class='card-text'>$<%= product.price %></h6><hr/>
-            <%= form_for(@order_item,  remote: true) do |f| %>
-              <%= f.hidden_field :product_id, value: product.id %>
-          <div class="form-group">
-            <%= f.hidden_field :quantity, value: 1, min: 1, class: 'form-control' %>
-          </div>
-            <div >
-                <%= f.submit "Add to cart", class: 'btn btn-primary btn-sm' %>
-            <% end %>
-              <%= link_to "Details", product %>
-              <%#class: 'float-right' do %>
-                <%#=  image_tag('details.png',style: 'width 20px; height: 20px;')%>
-
-              <%# end %>
+            <div class='card-body'>
+              <h5 class='card-title text-uppercase'><%= product.category.name %></h5>
+              <h4 class='card-title text-primary text-capitalize'><%= product.title %></h4>
+              <h6 class='card-text'>$<%= product.price %></h6><hr/>
+              <%= form_for(@order_item,  remote: true) do |f| %>
+                <%= f.hidden_field :product_id, value: product.id %>
+            <div class='form-group'>
+              <%= f.hidden_field :quantity, value: 1, min: 1, class: 'form-control' %>
             </div>
-          </div>
-        </div><br/>
-      </div>
-    <% end %>
+              <div>
+                <%= image_tag('cart.png') %>
+                <%= f.submit 'Add to cart', class: 'btn btn-primary btn-sm' %>
+              <% end %>
+                <%= link_to product, class: 'float-right' do %>
+                  <%=  image_tag('details.png', style: 'width 20px; height: 20px;')%>
+                  Details
+                <% end %>
+              </div>
+            </div>
+          </div><br/>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>
-<br/><%= pagy_bootstrap_nav(@pagys).html_safe %>
+  <% if @pagys.count > Product::PER_PAGE %>
+    <br/><%= pagy_bootstrap_nav(@pagys).html_safe %>
+  <% end %>
+<% end %>

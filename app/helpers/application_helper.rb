@@ -1,7 +1,7 @@
 module ApplicationHelper
   include Pagy::Frontend
 
-  def sortable(column, title = nil ,temp)
+  def sortable(column, title = nil, temp)
     title ||= column.titleize
     css_class = column == sort_column(temp) ? "current #{sort_direction}" : nil
     direction = column == sort_column(temp) && sort_direction == 'desc' ? 'asc' : 'desc'
@@ -9,11 +9,10 @@ module ApplicationHelper
   end
 
   def current_order
-    if !session[:order_id].nil?
+    if session[:order_id].present?
       Order.find(session[:order_id])
     else
       Order.new
     end
   end
-
 end

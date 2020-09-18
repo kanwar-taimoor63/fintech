@@ -7,7 +7,6 @@ module Admin
         if sort_column(@categories).present? && sort_direction.present?
           @pagys, @categories = pagy(@categories.order(sort_column(@categories) + ' ' + sort_direction), items: Category::PER_PAGE)
         end
-
       respond_to do |format|
         format.html
         format.csv { send_data Category.all.to_csv, filename: "categories-#{Date.today}.csv" }
@@ -53,7 +52,11 @@ module Admin
     private
 
     def set_category
-      @category = Category.find(params[:id])
+      @category = begin
+                    Category.find(params[:id])
+                  rescue StandardError
+                    nil
+                  end
     end
 
     def category_params

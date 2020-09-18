@@ -18,19 +18,29 @@
       </tr>
     </thead>
     <tbody>
-      <% @categories.each do |category| %>
-        <tr>
-          <td><%= category.id %></td>
-          <td><%= category.name %></td>
-          <td>
-            <%= link_to 'Show', [:admin,category ], class: 'btn btn-primary' %>
-            <%= link_to 'Edit', [:edit, :admin, category], class: 'btn btn-primary' %>
-            <%= link_to 'Destroy', [:admin, category], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %>
-          </td>
-        </tr>
+      <% if @categories.empty? %>
+        <p class='alert alert-danger text-center'>No categories to show</p>
+      <% else %>
+        <% @categories.each do |category| %>
+          <tr>
+            <td><%= category.id %></td>
+            <td><%= category.name %></td>
+            <td>
+              <%= link_to 'Show', [:admin,category ], class: 'btn btn-primary' %>
+              <%= link_to 'Edit', [:edit, :admin, category], class: 'btn btn-primary' %>
+              <% if !Product.all.find_by(category: category).nil? %>
+                <%= link_to 'Destroy', [:admin, category], method: :delete, data: { confirm: "Are you sure? \nThis will delete all associated products with this category!\n\nProdcuts that will be delete: \n #{Product.all.find_by(category: category).title}"}, class: 'btn btn-primary' %>
+              <% else %>
+                <%= link_to 'Destroy', [:admin, category], method: :delete, data: { confirm: "Are you sure?\n This is safe to delete no products under this category"}, class: 'btn btn-primary' %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>
 </div>
 <br>
-<%= pagy_bootstrap_nav(@pagy).html_safe %>
+<% if @pagy.count > Category::PER_PAGE %>
+  <%= pagy_bootstrap_nav(@pagy).html_safe %>
+<% end %>

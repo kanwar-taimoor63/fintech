@@ -8,7 +8,9 @@ class ApplicationController < ActionController::Base
   end
 
   before_action :configure_permitted_parameters, if: :devise_controller?
-
+  def render_not_found
+    render :file => "../../public/404.html",  :status => 404
+  end
   protected
 
   def configure_permitted_parameters

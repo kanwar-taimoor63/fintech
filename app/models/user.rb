@@ -1,10 +1,6 @@
 class User < ApplicationRecord
   include ActiveModel::Validations
   TEMP_PASSWORD = "Password123!@#"
-  #has_many :order, dependent: :destroy
-
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   validates :password, password: true
   validates :username, uniqueness: { case_sensitive: false }
   validates :firstname, :lastname, presence:true

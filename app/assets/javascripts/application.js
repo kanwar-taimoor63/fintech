@@ -13,6 +13,7 @@
 //= require jquery3
 //= require turbolinks
 //= require rails-ujs
+//= require ckeditor-jquery
 //= require activestorage
 //= require turbolinks
 //= require popper

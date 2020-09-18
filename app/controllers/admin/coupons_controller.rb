@@ -20,6 +20,7 @@ module Admin
     end
 
     def create
+      
       @coupon = Coupon.new(coupon_params)
       if @coupon.save
         redirect_to url: [:admin, @coupon], notice: 'Coupon was successfully created.'
@@ -51,7 +52,11 @@ module Admin
     private
 
     def set_coupons
-      @coupon = Coupon.find(params[:id])
+      @coupon = begin
+                  Coupon.find(params[:id])
+                rescue StandardError
+                  nil
+                end
     end
 
     def coupon_params

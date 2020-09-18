@@ -21,26 +21,39 @@ $(document).on('turbolinks:load',function() {
     }
   });
 
-
-
-  // var CustomerInfoVisible = localStorage.getItem('customer-info-card') == 'true';
-  // $('#customer-info-card').toggle(CustomerInfoVisible);
-  // var PaymentVisible = localStorage.getItem('payment-card') == 'true';
-  // $('#payment-card').toggle(PaymentVisible);
-
   $("#checkout-btn").click(function(){
     $("#customer-info-card").show( function () {
       localStorage.setItem('customer-info-card', $('#customer-info-card').is(':visible'));
       });
     });
   $("#customer-info-btn").click(function(){
+    var w = document.getElementById("firstname-field").value;
+    var x = document.getElementById("lastname-field").value;
+    var y = document.getElementById("email-field").value;
+    var z = document.getElementById("address-field").value;
+
+    if (x === "" || w==="" || y==="" || z==="") {
+        return;
+    }
     $("#payment-card").show( function () {
       localStorage.setItem('payment-card', $('#payment-card').is(':visible'));
       });
     });
 
+    $("#payment-btn").click(function(){
 
+      $("#customer-info-card").hide();
+      $("#payment-card").hide();
+      $("#summary-card").hide();
+      $("#confirmation-card").show( function () {
+        localStorage.setItem('confirmation-card', $('#confirmation-card').is(':visible'));
+      });
 
+    });
+
+  $('.ckeditor').ckeditor({
+    
+  });
 
 
 
