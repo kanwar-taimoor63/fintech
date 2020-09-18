@@ -1,5 +1,7 @@
 class PasswordValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
+    return if value.nil?
+
     rules = {
       " must contain at least one lowercase letter"  => /[a-z]+/,
       " must contain at least one uppercase letter"  => /[A-Z]+/,

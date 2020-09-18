@@ -5,7 +5,7 @@ module Admin
     def index
       @pagy, @categories = pagy(Category.search(params[:search]), items: Category::PER_PAGE)
         if sort_column(@categories).present? && sort_direction.present?
-          @pagys, @categoriess = pagy(@categories.order(sort_column(@categories) + ' ' + sort_direction), items: Category::PER_PAGE)
+          @pagys, @categories = pagy(@categories.order(sort_column(@categories) + ' ' + sort_direction), items: Category::PER_PAGE)
         end
 
       respond_to do |format|

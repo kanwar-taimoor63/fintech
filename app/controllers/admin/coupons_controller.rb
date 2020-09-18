@@ -33,7 +33,6 @@ module Admin
     def update
       if @coupon.update(coupon_params)
         redirect_to url: [:admin, @coupon], notice: 'Coupon was successfully updated.'
-
       else
         render :edit
 

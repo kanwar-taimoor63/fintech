@@ -3,7 +3,7 @@
   <%= link_to 'New Product', new_admin_product_path, class: 'btn btn-primary' %><hr/>
   <%= form_with method: :get, local: true do |f| %>
     <%= f.text_field :search,value: params[:search] %>
-    <%= f.submit 'search' %>
+    <%= f.submit 'search' , class: 'btn btn-primary'%>
   <% end %><hr/>
   <%= link_to 'Export Products', admin_products_path(format: :csv), class: 'btn btn-primary' %>
 </div>

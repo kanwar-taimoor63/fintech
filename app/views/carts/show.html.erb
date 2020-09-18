@@ -1,0 +1,8 @@
+<div class="cart_item">
+  <%= render "carts/cart_item" %>
+</div>
+<% if current_order.id.nil? %>
+<p>Your cart is empty right now</p>
+<% else %>
+<%= link_to "checkout", new_order_path(current_order) %>
+<% end %>

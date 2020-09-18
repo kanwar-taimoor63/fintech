@@ -1,5 +1,6 @@
 <h2 class='text-primary'>PRODUCT ID: <%= @product.id %></h2><br/>
 <div class='container'>
+  <%= image_tag(@product.image, class: 'product-image' ) if @product.image.attachment %><br/>
   <strong>Name of Product:</strong>
   <%= @product.title %><br/>
   <hr/>
