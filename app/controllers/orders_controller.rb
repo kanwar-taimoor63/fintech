@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: %i[show create update]
   before_action :authenticate_user!, only: %i[index]
   def index
-    @pagys, @orders = pagy(Order.search(params[:search]).where(user_id: @user.id), items: Order::PER_PAGE)
+    @orders = Order.all.where(user_id: current_user)
   end
 
   def new
@@ -33,10 +33,8 @@ class OrdersController < ApplicationController
   end
 
   def update
-    byebug
     @order.user_id = current_user.id
     if @order.update!(order_params)
-      byebug
       session[:order_id] = nil
       render :show
     else
