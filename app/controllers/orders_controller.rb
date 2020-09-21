@@ -61,8 +61,8 @@ class OrdersController < ApplicationController
 
   def apply_coupon
     @discount_amount = 0.0
-    @order.order_items.each do |orderitems|
-      orderitems.product.coupons.each do |coupon|
+    @order.order_items.each do |order_items|
+      order_items.product.coupons.each do |coupon|
         next unless coupon.name == params[:coupon]
 
         next unless coupon.redeem_count.positive? && (coupon.validity - Date.today).to_i >= 0
@@ -70,12 +70,12 @@ class OrdersController < ApplicationController
         coupon.redeem_count = coupon.redeem_count - 1
 
         if coupon.value_method == 'amount'
-          @discount_amount += (coupon.value * orderitems.quantity)
+          @discount_amount += (coupon.value * order_items.quantity)
           @total_price -= (coupon.value * orderitems.quantity)
-          
+
         else
-          @discount_amount += (coupon.value * orderitems.quantity)
-          @total_price -= (@order.calculate_subtotal * (coupon.value * orderitems.quantity))
+          @discount_amount += (coupon.value * order_items.quantity)
+          @total_price -= (@order.calculate_subtotal * (coupon.value * order_items.quantity))
         end
         coupon.update_columns(redeem_count: coupon.redeem_count)
       end
