@@ -1,0 +1,39 @@
+<% if @user %>
+  <p>
+    <%= link_to 'Back', root_path , class: 'btn btn-primary' %>
+  </p>
+  <div class="card text-center">
+    <div class="card-header label">
+      <%= @user.username %>'s Profile
+    </div>
+    <div class="card-body ">
+      <div class="card-text ">
+        <div class="row justify-content-md-center">
+          <div class="col col-lg-2 label"><%= image_tag 'user-icon.png', class: 'icon'%> First Name</div>
+          <div class="col col-lg-2"><%= @user.firstname %> </div>
+        </div><br/>
+        <div class="row justify-content-md-center">
+          <div class="col col-lg-2 label"><%= image_tag 'user-icon.png', class: 'icon'%> Last Name</div>
+          <div class="col col-lg-2"><%= @user.lastname %> </div>
+        </div><br/>
+        <div class="row justify-content-md-center">
+          <div class="col col-lg-2 label"><%= image_tag 'username-icon.png', class: 'icon'%> User Name</div>
+          <div class="col col-lg-2"><%= @user.username %> </div>
+        </div><br/>
+        <div class="row justify-content-md-center">
+          <div class="col col-lg-2 label"><%= image_tag 'email-icon.png', class: 'icon'%> User Email</div>
+          <div class="col col-lg-2"><%= @user.email %> </div>
+        </div><br/>
+      </div>
+    </div>
+      <div class="card-footer text-muted">
+     Last Updated at <%= @user.updated_at %>
+      </div>
+  </div>
+  <br/>
+  <div class='text-center'>
+    <%= link_to "Edit Profile", edit_user_path(@user), class: 'btn btn-primary btn-signin' %>   
+  </div>
+<% else %>
+  <%= render :file => '../../public/404.html',  :status => 404 %>
+<% end %>

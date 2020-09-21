@@ -1,20 +1,10 @@
-<nav class="navbar navbar-light justify-content-between mini-nav">
-    <a class="navbar-brand text-primary">Orders</a>
-    <form class="form-inline float-right">
-      <%= form_with method: :get, local: true do |f| %>
-        <%= f.text_field :search, value: params[:search], class: 'form-control mr-sm-2', placeholder: "Search" %>
-        <%= f.submit 'search', class: 'btn btn-outline-primary my-2 my-sm-0'%>
-      <% end %>
-    </form>
-  </nav><br/>
-<% if @orders.empty? %>
-  <p class='alert alert-danger text-center'>No Orders to show</p>
-<% else %>
-  <% @orders.all.each do |order| %>
+<% if @order %>
   <div class='card'>
-    <h4 class='card-header text-primary'>Order No. <%= order.id %></h4>
+    <h4 class='card-header text-primary'>Summary</h4>
     <div id='confirmation-card'>
       <div class='card-body'>
+        <h2 class='card-title'>Order No. <%= @order.id %></h2><br/>
+        <h2 class='card-title'>User Id. <%= @order.user_id %></h2><br/>
         <h5 class='card-title'>Product Details</h5><hr/>
           <div class='row'>
             <div class='col'>
@@ -28,7 +18,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% order.order_items.each do |ord| %>
+                  <% @order.order_items.each do |ord| %>
                     <tr>
                       <td><%= ord.product.title %></td>
                       <td><%= ord.product.price %></td>
@@ -44,34 +34,35 @@
           <div class='row'>
             <div class='col'>
               <%= label_tag 'First Name: ', nil, class: 'no-transform label' %>
-              <%= order.firstname %>
+              <%= @order.firstname %>
             </div>
             <div class='col'>
               <%= label_tag 'Last Name: ', nil, class: 'no-transform label' %>
-              <%= order.lastname %>
+              <%= @order.lastname %>
             </div>
           </div>
           <div class='row'>
             <div class='col'>
               <%= label_tag 'Email: ', nil, class: 'no-transform label' %>
-              <%= order.email %>
+              <%= @order.email %>
             </div>
             <div class='col'>
               <%= label_tag 'Address: ', nil, class: 'no-transform label' %>
-              <%= order.address %>
+              <%= @order.address %>
             </div>
           </div>
           <%= label_tag 'Payment Method: ', nil, class: 'no-transform label' %>
-          <%= order.payment_method %><br/><br/>
+          <%= @order.payment_method %><br/><br/>
           <h5 class='card-title'>Bill</h5><hr/>
           <%= label_tag 'Total Price: ', nil, class: 'no-transform label' %>
-          $<%= order.subtotal %>
+          $<%= @order.subtotal %>
+          <%= link_to 'Back', admin_subscriptions_path, notice:'Order was Successfully Placed', class: 'btn btn-primary float-right' %><br/>
           </div>
         </div>
       </div>
-    <br/>
-    <% end %>
-  <% if @pagys.count > Order::PER_PAGE %>
-    <br/><%= pagy_bootstrap_nav(@pagys).html_safe %>
-  <% end %>
+      </div>
+    </div>
+  <br/>
+<% else %>
+  <%= render :file => '../../public/404.html',  :status => 404 %>
 <% end %>

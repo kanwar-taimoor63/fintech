@@ -9,7 +9,7 @@
   </head>
 
   <body>
-           
+
     <div class='row'>
       <div class='col-2'>
         <nav class='flex-fill  navbar navbar-light bg-primary'>
@@ -18,7 +18,13 @@
             <li class='nav-item bg-primary text-center'>
             <img src='/assets/logo2.png' width='50' height='50'>
             <hr/></li>
-          <% end %> 
+          <% end %>
+          <%= link_to admin_subscriptions_path, class: 'bg-primary' do %>
+            <li class='nav-item bg-primary text-center'>
+            <%= image_tag ('users.png') %><br/>
+            <label class='bg-primary text-white'> Subscriptions</label>
+            <hr/></li>
+          <% end %>
           <%= link_to admin_users_path, class: 'bg-primary' do %>
             <li class='nav-item bg-primary text-center'>
             <%= image_tag ('users.png') %><br/>

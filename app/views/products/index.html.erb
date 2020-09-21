@@ -1,7 +1,15 @@
+<nav class="navbar navbar-light justify-content-between mini-nav">
+    <a class="navbar-brand text-primary">Products</a>
+    <form class="form-inline float-right">
+      <%= form_with method: :get, local: true do |f| %>
+        <%= f.text_field :search, value: params[:search], class: 'form-control mr-sm-2', placeholder: "Search" %>
+        <%= f.submit 'search', class: 'btn btn-outline-primary my-2 my-sm-0'%>
+      <% end %>
+    </form>
+  </nav><br/>
 <% if @products.empty? %>
   <p class='alert alert-danger text-center'>No products to show</p>
 <% else %>
-  <h3>Products</h3>
   <div class='container'>
     <div class='row'>
       <% @products.each do |product| %>

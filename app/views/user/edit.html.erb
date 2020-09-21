@@ -1,0 +1,70 @@
+<p>
+  <%= link_to "Back", user_path , class: 'btn btn-primary' %>
+</p>
+  <%= form_for( [@user], html: { method: :put }) do |form| %>
+    <%= render '/shared/error_msg', resource: @user %>
+    <div class="card ">
+      <div class="card-header label">
+        <%= @user.username %>'s Profile
+      </div>
+      <div class="card-body">
+        <div class="card-text">
+          <div class= 'form-group container' >
+            <div class="row">
+              <div class="col-3 label">
+                <%= image_tag 'user-icon.png', class: 'icon'%>
+                <%= form.label :name, 'Firstname', class: 'label' %>
+              </div>
+              <div class="col-9">
+                <%= form.text_field :firstname, class: 'form-control', placeholder: 'First Name'%>
+              </div>
+            </div><br/>
+            <div class="row">
+              <div class="col-3  label">
+                <%= image_tag 'user-icon.png', class: 'icon'%>
+                <%= form.label :name, 'Lastname', class: 'label' %>
+                <br/></div>
+              <div class="col-9">
+                <%= form.text_field :lastname, class: 'form-control', placeholder: 'Last Name' %>
+              </div>
+            </div><br/>
+            <div class="row">
+              <div class="col-3 label">
+                <%= image_tag 'email-icon.png', class: 'icon'%>
+                <%= form.label :email, 'Email', class: 'label' %>
+              </div>
+              <div class="col-9">
+                <%= form.email_field :email, autocomplete: 'email', class: 'form-control', placeholder: 'Email',
+                required: true %>
+              </div>
+            </div><br/>
+            <div class="row">
+              <div class="col-3 label">
+                <%= image_tag 'password-icon.png', class: 'icon'%>
+                <%= form.label :password, 'Password', class: 'label' %>
+              </div>
+              <div class="col-9">
+                <%= form.password_field :password, autocomplete: 'new-password', id: 'password', class: 'form-control', placeholder: 'Password'%>
+                <label class= 'less-imp-label ' >Hint: The password should be at least eight characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ & ).</label><br/>
+              </div>
+            </div><br/>
+            <div class="row">
+              <div class="col-3 label">
+                <%= image_tag 'password-icon.png', class: 'icon'%>
+                <%= form.label :password_confirmation, 'Confirm Password', class: 'label' %><br/>
+              </div>
+              <div class="col-9">
+                <%= form.password_field :password_confirmation, id: 'confirm_password', autocomplete: 'new-password', class: 'form-control',
+                placeholder: 'Confirm Password' %><br/>
+                <div id='message'>
+                </div>
+             </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><br/>
+    <div class= 'actions text-center' >
+      <%= form.submit 'Edit User', id: 'submit', class: 'btn btn-signin btn-primary' %>
+    </div>
+  <% end %>

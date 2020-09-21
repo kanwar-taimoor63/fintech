@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: %i[show create update]
   before_action :authenticate_user!, only: %i[index]
   def index
-    @orders = Order.all.where(user_id: current_user)
+    @orders = Order.where(user_id: current_user)
   end
 
   def new
@@ -34,7 +34,6 @@ class OrdersController < ApplicationController
   def update
     @order.user_id = current_user.id
     if @order.update!(order_params)
-
       session[:order_id] = nil
       render :show
     else

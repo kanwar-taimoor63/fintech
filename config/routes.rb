@@ -7,13 +7,15 @@ Rails.application.routes.draw do
       resources :categories
       resources :coupons
       resources :products
+      resources :subscriptions, only: %i[index show destroy]
     end
   end
 
   resources :products, only: %i[index show]
   resources :order_items
-  resource :carts, only: [:show]
+  resource :carts, only: %i[show]
   resources :orders
+  resources :user, only: %i[show edit update]
   get 'policy', to: 'pages#policy'
   devise_for :users, controllers: { registrations: 'registrations' }
 end
