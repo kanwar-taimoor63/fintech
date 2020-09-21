@@ -53,7 +53,7 @@ module Admin
 
     def set_user
       @user = begin
-                User.find(params[:id])
+                User.find(current_user.id)
               rescue StandardError
                 nil
               end

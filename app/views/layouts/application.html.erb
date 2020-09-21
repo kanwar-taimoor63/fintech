@@ -9,26 +9,33 @@
   </head>
   <body>
     <nav class='flex-fill  navbar navbar-light bg-primary'>
-      <%= link_to root_path, class: 'bg-primary' do %>
-        <li class ='nav-item bg-primary text-center'>
-        <img src='/assets/logo2.png' width='50' height='50'>
-        </li>
-      <% end %>
       <div class='form-inline'>
-       <ul class='nav navbar-nav navbar-right'>
-        <li class='active cart text-white nav-item'><%= render 'layouts/cart' %></li>
-        </ul>
+        <%= link_to root_path, class: 'bg-primary' do %>
+          <li class ='nav-item bg-primary text-center'>
+          <img src='/assets/logo2.png' width='50' height='50'>
+          </li>
+        <% end %> 
+        <% if user_signed_in? && current_user.admin? %>
+          <hr width='10'>
+          <%= link_to 'Admin Portal', admin_users_path, class: 'btn btn-outline-light' %>
+        <%end %>
+      </div>
       <% if user_signed_in? %>
-      <hr width="5" >
-      
-      <%= link_to 'My Orders', orders_path, class: 'btn btn-outline-light' %>
-    </div>
+        <div class='form-inline'>
+          <ul class='nav navbar-nav navbar-right'>
+            <li class='active cart text-white nav-item'><%= render 'layouts/cart' %></li>
+          </ul>
+          <hr width='5'>
+          <%= link_to 'My Orders', orders_path, class: 'btn btn-outline-light' %>
+        </div>
         <div class ='text-right  text-white'>
-          
-          <%= current_user.username %>
+          <%= link_to current_user.username,user_path(current_user),class:'text-white' %>
           <%= link_to 'signout', destroy_user_session_path, method: 'delete', class: 'btn btn-outline-light' %>
         </div>
       <% else %>
+        <ul class='nav navbar-nav navbar-right'>
+          <li class='active cart text-white nav-item'><%= render 'layouts/cart' %></li>
+        </ul>
         <div class='float-left'>
           <%= link_to 'Log in / Sign up', new_user_session_path, class: 'btn btn-outline-light' %>
         </div>
