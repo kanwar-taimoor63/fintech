@@ -5,7 +5,19 @@
       <div class='form-group'>
         <%= form.label :name , 'Name of Coupon', class: 'required no-transform label', class: 'label required' %><br/>
         <%= form.text_field :name, class: 'form-control ', autofocus: true, required: true, class:'form-control col-md-6' %>
-        <%= form.label :value, 'Value of Coupon', class: 'label required' %><br/>
+        <%= form.label :redeem_count , 'Redeem Count', class: 'required no-transform label', class: 'label required' %><br/>
+        <%= form.text_field :redeem_count, class: 'form-control ', autofocus: true, required: true, class:'form-control col-md-6' %>
+         <%= form.label :validity , 'Redeem Count', class: 'required no-transform label', class: 'label required' %><br/>
+        <%= form.date_field :validity, class: 'form-control ', autofocus: true, required: true, class:'form-control col-md-6', min: Date.today %>
+        <br/><%= form.label :value, 'Value of Coupon', class: 'label required' %><br/>
+        <div class='row'>
+          <div class='col-2'>
+            <%= form.radio_button :value_method, 'amount', checked: false, required: true %> Value in amount
+          </div>
+          <div class='col-3'>
+            <%= form.radio_button :value_method, 'percentage', checked: false, required: true%> Value in percentage
+          </div>
+        </div>
         <%= form.number_field :value,class: 'form-control ', autofocus: true, required: true, class: 'form-control col-md-6' %>
         <label ><strong>Select products:</strong></label>
         <%=form.collection_select :'product_ids', Product.all, :id, :title, {  }, { multiple: true, class:'form-control col-md-6' } %><br>

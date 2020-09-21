@@ -7,6 +7,12 @@
     <strong>Value of Coupon:</strong>
     <%= @coupon.value %><br/>
     <hr/>
+    <strong>Validity of Coupon:</strong>
+    <%= @coupon.validity%><br/>
+    <hr/>
+    <strong>Redeem Count:</strong>
+    <%= @coupon.redeem_count%><br/>
+    <hr/>
     <strong>Products with this coupon</strong><br/>
     <% @coupon.products.each do |products| %>
       <%= link_to products.id, admin_product_path(products) %>
