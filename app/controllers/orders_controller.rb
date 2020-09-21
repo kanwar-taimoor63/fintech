@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: %i[show create update]
   before_action :authenticate_user!, only: %i[index]
   def index
-    @orders = Order.all.where(user_id: current_user)
+    @orders = Order.where(user_id: current_user)
   end
 
   def new
@@ -23,7 +23,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-    byebug
     @order = @order.update(order_params)
     if @order.save
       redirect_to root_path, notice: 'Order was successfully placed'
