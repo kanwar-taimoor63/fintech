@@ -5,7 +5,7 @@ module Admin
     def index
       @pagy, @coupons = pagy(Coupon.search(params[:search]), items: Coupon::PER_PAGE)
       if sort_column(@coupons).present? && sort_direction.present?
-      @pagy, @coupons= pagy(@coupons.order(sort_column(@coupons) + ' ' + sort_direction), items: Coupon::PER_PAGE)
+        @pagy, @coupons = pagy(@coupons.order(sort_column(@coupons) + ' ' + sort_direction), items: Coupon::PER_PAGE)
       end
       respond_to do |format|
         format.html
@@ -20,8 +20,10 @@ module Admin
     end
 
     def create
-      
       @coupon = Coupon.new(coupon_params)
+
+      @coupon.value = @coupon.value * 0.01 if params[:value_method] == 'percentage'
+
       if @coupon.save
         redirect_to url: [:admin, @coupon], notice: 'Coupon was successfully created.'
       else
@@ -60,7 +62,7 @@ module Admin
     end
 
     def coupon_params
-      params.require(:coupon).permit(:name, :value, :search, product_ids: [])
+      params.require(:coupon).permit(:name, :value, :search, :value_method, :validity, :redeem_count, product_ids: [])
     end
   end
 end

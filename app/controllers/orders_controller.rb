@@ -23,7 +23,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-    byebug
     @order = @order.update(order_params)
     if @order.save
       redirect_to root_path, notice: 'Order was successfully placed'
@@ -33,10 +32,9 @@ class OrdersController < ApplicationController
   end
 
   def update
-    byebug
     @order.user_id = current_user.id
     if @order.update!(order_params)
-      byebug
+
       session[:order_id] = nil
       render :show
     else
@@ -63,14 +61,26 @@ class OrdersController < ApplicationController
 
   def apply_coupon
     @discount_amount = 0.0
-    @order.order_items.each do |ord|
-      ord.product.coupons.each do |b|
-        if b.name == params[:coupon]
-          @discount_amount += (b.value * ord.quantity)
-          @total_price -= (b.value * ord.quantity)
+    @order.order_items.each do |orderitems|
+      orderitems.product.coupons.each do |coupon|
+        next unless coupon.name == params[:coupon]
+
+        next unless coupon.redeem_count.positive? && (coupon.validity - Date.today).to_i >= 0
+
+        coupon.redeem_count = coupon.redeem_count - 1
+
+        if coupon.value_method == 'amount'
+          @discount_amount += (coupon.value * orderitems.quantity)
+          @total_price -= (coupon.value * orderitems.quantity)
+          
+        else
+          @discount_amount += (coupon.value * orderitems.quantity)
+          @total_price -= (@order.calculate_subtotal * (coupon.value * orderitems.quantity))
         end
+        coupon.update_columns(redeem_count: coupon.redeem_count)
       end
     end
+
     @total_price = 0.0 if @total_price < 0
     @order.update_columns(subtotal: @total_price, user_id: @user.id)
   end
