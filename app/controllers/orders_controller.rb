@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: %i[show create update]
   before_action :authenticate_user!, only: %i[index]
   def index
-    @orders = Order.where(user_id: current_user)
+    @pagys, @orders = pagy(Order.where(user_id: current_user).search(params[:search]), items: Order::PER_PAGE)
   end
 
   def new

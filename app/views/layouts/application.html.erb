@@ -29,7 +29,7 @@
           <%= link_to 'My Orders', orders_path, class: 'btn btn-outline-light' %>
         </div>
         <div class ='text-right  text-white'>
-          <%= link_to current_user.username,user_path(current_user),class:'text-white' %>
+          <%= link_to current_user.username, user_path(current_user),class:'text-white' %>
           <%= link_to 'signout', destroy_user_session_path, method: 'delete', class: 'btn btn-outline-light' %>
         </div>
       <% else %>
