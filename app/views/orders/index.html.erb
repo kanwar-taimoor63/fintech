@@ -28,13 +28,16 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% order.order_items.each do |ord| %>
-                    <tr>
-                      <td><%= ord.product.title %></td>
-                      <td><%= ord.product.price %></td>
-                      <td><%= ord.quantity %></td>
-                      <td><%= ord.total_price %></td>
-                    </tr>
+                  <%  order.order_items.each do |order_items| unless order.order_items.empty? %>
+                    <% if order_items.product %>
+                      <tr>
+                        <td><%= order_items.product.title %></td>
+                        <td><%= order_items.product.price %></td>
+                        <td><%= order_items.quantity %></td>
+                        <td><%= order_items.total_price %></td>
+                      </tr>
+                    <% end %>
+                  <% end %>
                   <% end %>
                 </tbody>
               </table>

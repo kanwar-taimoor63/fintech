@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   resources :order_items
   resource :carts, only: %i[show]
   resources :orders
-  resources :user, only: %i[show edit update]
-  get 'policy', to: 'pages#policy'
+  resource :user, only: %i[show edit update]
+  get 'policy', to: 'pages#policy' 
   devise_for :users, controllers: { registrations: 'registrations' }
+  
+  match "*path", to: "pages#error_404", via: :all
 end
