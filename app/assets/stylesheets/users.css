@@ -4,7 +4,11 @@
   padding: 0px 15px;
   box-sizing: border-box;
   margin: 0 auto;
-}  
+}
+.card-img-top {
+  height: 200px ;
+  width: 150px auto;
+}
 .required:after {
   content: ' *';
   font-size: 15px;
