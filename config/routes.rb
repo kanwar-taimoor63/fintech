@@ -18,6 +18,12 @@ Rails.application.routes.draw do
   resource :user, only: %i[show edit update]
   get 'policy', to: 'pages#policy' 
   devise_for :users, controllers: { registrations: 'registrations' }
+
+  namespace :api do
+    namespace :v1 do
+      resources :products
+    end
+  end
   
   match "*path", to: "pages#error_404", via: :all
 end
