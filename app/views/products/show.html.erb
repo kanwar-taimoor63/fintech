@@ -5,9 +5,17 @@
     <strong>Name of Product:</strong>
     <%= @product.title %><br/>
     <hr/>
-    <strong>Price of Product:</strong>
+    <strong>Original Price of Product:</strong>
     <%= @product.price %><br/>
     <hr/>
+    <% if @product.expiry_date.present? && @product.expiry_date > Date.today && @product.discount_price > 0 %>
+      <strong>Discounted Price of Product:</strong>
+      <%= @product.discount_price %><br/>
+      <hr/>
+      <strong> Valid Till Date:</strong>
+      <%= @product.expiry_date %>
+      <hr/>
+    <% end %>
     <strong>Description of Product:</strong>
     <%= @product.description.html_safe %><br/>
     <hr/>

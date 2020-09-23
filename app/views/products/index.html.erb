@@ -23,7 +23,7 @@
             <div class='card-body'>
               <h5 class='card-title text-uppercase'><%= product.category.name %></h5>
               <h4 class='card-title text-primary text-capitalize'><%= product.title %></h4>
-              <h6 class='card-text'>$<%= product.price %></h6><hr/>
+              <h6 class='card-text'>$<%= product.price_with_discount %></h6><hr/>
               <%= form_for(@order_item,  remote: true) do |f| %>
                 <%= f.hidden_field :product_id, value: product.id %>
             <div class='form-group'>

@@ -1,6 +1,6 @@
 module Admin
   class ProductsController < BaseController
-    before_action :set_product, only: %i[show edit update destroy]
+    before_action :set_product, only: %i[show edit update destroy discount]
 
     def index
       @pagy, @products = pagy(Product.search(params[:search]), items: Product::PER_PAGE)
@@ -58,7 +58,11 @@ module Admin
     end
 
     def product_params
-      params.require(:product).permit(:title, :price, :image, :description, :status, :category_id, coupon_ids:[])
+      if params[:product][:discount_price].present? && params[:product][:expiry_date].present?
+        params.require(:product).permit(:title, :price, :discount_price, :expiry_date, :image, :description, :status, :category_id, coupon_ids:[])
+      else
+        params.require(:product).permit(:title, :price, :image, :description, :status, :category_id, coupon_ids:[])
+      end
     end
   end
 end

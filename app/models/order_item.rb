@@ -9,7 +9,7 @@ class OrderItem < ApplicationRecord
     if persisted?
       self[:unit_price]
     else
-      product.price
+      product.price_with_discount
     end
   end
 

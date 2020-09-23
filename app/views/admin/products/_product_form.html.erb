@@ -5,6 +5,10 @@
     <%= form.text_field :title, autofocus: true, required: true, placeholder: 'Name', class: 'form-control col-md-6' %> <br/>
     <%= form.label :price, 'Price', class: 'label required' %> <br/>
     <%= form.text_field :price, autofocus: true, required: true, placeholder: 'Price', class: 'form-control col-md-6' %> <br/>
+    <%= form.label :discount_price, 'Discount Price', class: 'label' %><br/>
+    <%= form.number_field :discount_price,class: 'form-control ', autofocus: true, class: 'form-control col-md-6' %><br/>
+    <%= form.label :expiry_date , 'Valid Till Date', class: 'required no-transform label', class: 'label required' %><br/>
+    <%= form.date_field :expiry_date, class: 'form-control ', autofocus: true, class:'form-control col-md-6', min: Date.today %><br/>
     <%= form.label :image, 'Image', class: 'label' %><br/>
     <%= form.file_field :image %><br/>
     <%= form.label :description, 'Product Description', class: 'label' %> <br/>

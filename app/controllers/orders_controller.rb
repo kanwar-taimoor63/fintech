@@ -70,7 +70,7 @@ class OrdersController < ApplicationController
 
         if coupon.value_method == 'amount'
           @discount_amount += (coupon.value * order_items.quantity)
-          @total_price -= (coupon.value * orderitems.quantity)
+          @total_price -= (coupon.value * order_items.quantity)
 
         else
           @discount_amount += (coupon.value * order_items.quantity)
