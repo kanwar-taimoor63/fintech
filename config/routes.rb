@@ -16,8 +16,19 @@ Rails.application.routes.draw do
   resource :carts, only: %i[show]
   resources :orders
   resource :user, only: %i[show edit update]
-  get 'policy', to: 'pages#policy' 
+  get 'policy', to: 'pages#policy'
   devise_for :users, controllers: { registrations: 'registrations' }
-  
-  match "*path", to: "pages#error_404", via: :all
+
+  namespace :api do
+    namespace :v1 do
+      resources :products, only: %i[index]
+    end
+    namespace :v2 do
+      post :auth, to: 'authentication#create'
+      resources :products, only: %i[index]
+    end
+    get '/*a', to: 'pages#error_404', via: :all
+  end
+
+  match '*path', to: 'pages#error_404', via: :all
 end
