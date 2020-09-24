@@ -18,6 +18,8 @@ module Redeemable
           coupon.name == params[:coupon] ? coupon_operation(coupon, order_items) : ''
         end
       end
+      coupon = Coupon.find_by(name: params[:coupon])
+      coupon&.update_columns(redeem_count: coupon.redeem_count - 1)
       @total_price = 0.0 if @total_price.negative?
       @order.update_columns(subtotal: @total_price, user_id: @user.id)
     end
@@ -26,11 +28,9 @@ module Redeemable
   private
 
   def coupon_operation(coupon, order_items)
-    if coupon.redeem_count.positive? && (coupon.validity - Date.today).to_i >= 0
-      coupon.value_method == 'amount' ? amount(coupon, order_items) : percentage(coupon, order_items)
-      coupon.redeem_count = coupon.redeem_count - 1
-      coupon.update_columns(redeem_count: coupon.redeem_count)
-    end
+    return unless coupon.redeem_count.positive? && (coupon.validity - Date.today).to_i >= 0
+
+    coupon.value_method == 'amount' ? amount(coupon, order_items) : percentage(coupon, order_items)
   end
 
   def amount(coupon, order_items)
