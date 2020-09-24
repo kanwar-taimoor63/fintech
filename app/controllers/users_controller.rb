@@ -16,11 +16,7 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user = begin
-              User.find(current_user.id)
-            rescue StandardError
-              nil
-            end
+    @user = User.find(current_user.id)
   end
 
   def user_params

@@ -47,11 +47,7 @@ class OrdersController < ApplicationController
   end
 
   def set_order
-    @order = begin
-                Order.find(params[:id])
-             rescue StandardError
-               nil
-              end
+    @order = Order.find(params[:id])
     render_not_found if @order.user_id != current_user.id
   end
 

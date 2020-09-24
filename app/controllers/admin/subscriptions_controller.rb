@@ -19,11 +19,7 @@ module Admin
     private
 
     def set_order
-      @order =  begin
-                  Order.find(params[:id])
-                  rescue StandardError
-                  nil
-                end
+      @order =  Order.find(params[:id])
     end
   end
 end
