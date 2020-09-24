@@ -5,7 +5,7 @@ module Admin
     def index
       @pagy, @coupons = pagy(Coupon.search(params[:search]), items: Coupon::PER_PAGE)
       if sort_column(@coupons).present? && sort_direction.present?
-        @pagy, @coupons = pagy(@coupons.order(sort_column(@coupons) + ' ' + sort_direction), items: Coupon::PER_PAGE)
+        @coupons = @coupons.order(sort_column(@coupons) + ' ' + sort_direction)
       end
       respond_to do |format|
         format.html

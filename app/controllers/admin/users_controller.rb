@@ -5,7 +5,7 @@ module Admin
     def index
       @pagy, @users = pagy(User.client.search(params[:search]), items: User::PER_PAGE)
       if sort_column(@users).present? && sort_direction.present?
-        @pagy, @users = pagy(@users.order(sort_column(@users) + ' ' + sort_direction), items: User::PER_PAGE)
+        @users = @users.order(sort_column(@users) + ' ' + sort_direction)
       end
 
       respond_to do |format|

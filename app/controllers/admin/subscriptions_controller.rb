@@ -2,7 +2,7 @@ module Admin
   class SubscriptionsController < BaseController
     before_action :set_order, only: %i[show destroy]
     def index
-      @orders = Order.all
+      @orders = Order.date_search(params[:date_from], params[:date_to])
     end
 
     def show;end

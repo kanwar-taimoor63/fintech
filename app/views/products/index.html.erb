@@ -1,12 +1,12 @@
 <nav class="navbar navbar-light justify-content-between mini-nav">
-    <a class="navbar-brand text-primary">Products</a>
-    <form class="form-inline float-right">
-      <%= form_with method: :get, local: true do |f| %>
-        <%= f.text_field :search, value: params[:search], class: 'form-control mr-sm-2', placeholder: "Search" %>
-        <%= f.submit 'search', class: 'btn btn-outline-primary my-2 my-sm-0'%>
-      <% end %>
-    </form>
-  </nav><br/>
+  <a class="navbar-brand text-primary">Products</a>
+  <form class="form-inline float-right">
+    <%= form_with method: :get, local: true do |f| %>
+      <%= f.text_field :search, value: params[:search], class: 'form-control mr-sm-2', placeholder: "Search" %>
+      <%= f.submit 'search', class: 'btn btn-outline-primary my-2 my-sm-0'%>
+    <% end %>
+  </form>
+</nav><br/>
 <% if @products.empty? %>
   <p class='alert alert-danger text-center'>No products to show</p>
 <% else %>
@@ -16,28 +16,33 @@
         <div class='col-sm-4'>
           <div class='card' style='width: 18rem;'>
             <% if product.image.attachment %>
-            <%= image_tag(product.image, class: 'card-img-top' ) %><br/>
-          <% else %>
-            <img class='card-img-top' src='/assets/logo.png' alt='Card image cap'>
-          <% end %>
+              <%= image_tag(product.image, class: 'card-img-top' ) %><br/>
+            <% else %>
+              <img class='card-img-top' src='/assets/logo.png' alt='Card image cap'>
+            <% end %>
             <div class='card-body'>
               <h5 class='card-title text-uppercase'><%= product.category.name %></h5>
               <h4 class='card-title text-primary text-capitalize'><%= product.title %></h4>
-              <h6 class='card-text'>$<%= product.price_with_discount %></h6><hr/>
+              <% if product.discount_price %>
+                <del><h6 class='card-text'>Price: $<%= product.price %></h6></del>
+                <h6 class='card-text'>Discounted Price: $<%= product.discount_price %></h6><hr/>
+              <% else %>
+                <h6 class='card-text'>Price: $<%= product.price %></h6><hr/>
+              <% end %>
               <%= form_for(@order_item,  remote: true) do |f| %>
                 <%= f.hidden_field :product_id, value: product.id %>
-            <div class='form-group'>
-              <%= f.hidden_field :quantity, value: 1, min: 1, class: 'form-control' %>
-            </div>
-              <div>
-                <%= image_tag('cart.png') %>
-                <%= f.submit 'Add to cart', class: 'btn btn-primary btn-sm' %>
+                <div class='form-group'>
+                  <%= f.hidden_field :quantity, value: 1, min: 1, class: 'form-control' %>
+                </div>
+                <div>
+                  <%= image_tag('cart.png') %>
+                    <%= f.submit 'Add to cart', class: 'btn btn-primary btn-sm' %>
               <% end %>
-                <%= link_to product, class: 'float-right' do %>
-                  <%=  image_tag('details.png', style: 'width 20px; height: 20px;')%>
-                  Details
-                <% end %>
-              </div>
+                  <%= link_to product, class: 'float-right' do %>
+                    <%=  image_tag('details.png', style: 'width 20px; height: 20px;')%>
+                      Details
+                  <% end %>
+                </div>
             </div>
           </div><br/>
         </div>

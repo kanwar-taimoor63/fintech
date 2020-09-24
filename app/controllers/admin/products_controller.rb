@@ -5,7 +5,7 @@ module Admin
     def index
       @pagy, @products = pagy(Product.search(params[:search]), items: Product::PER_PAGE)
       if sort_column(@products).present? && sort_direction.present?
-        @pagy, @products = pagy(@products.order(sort_column(@products) + ' ' + sort_direction), items: Product::PER_PAGE)
+        @products = @products.order(sort_column(@products) + ' ' + sort_direction)
       end
       respond_to do |format|
         format.html
