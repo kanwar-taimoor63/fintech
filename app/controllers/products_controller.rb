@@ -13,10 +13,6 @@ class ProductsController < ApplicationController
   private
 
   def set_product
-    @product = begin
-                Product.find(params[:id])
-               rescue StandardError
-                nil
-               end
+    @product = Product.find(params[:id])
   end
 end

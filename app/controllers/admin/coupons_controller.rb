@@ -54,11 +54,7 @@ module Admin
     private
 
     def set_coupons
-      @coupon = begin
-                  Coupon.find(params[:id])
-                rescue StandardError
-                  nil
-                end
+      @coupon = Coupon.find(params[:id])
     end
 
     def coupon_params
