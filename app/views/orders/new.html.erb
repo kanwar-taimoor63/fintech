@@ -15,13 +15,13 @@
       </tr>
     </thead>
     <tbody>
-      <% current_order.order_items.each do |ord| %>
+      <% current_order.order_items.each do |order_items| %>
         <tr>
-          <td><%= ord.id %></td>
-          <td><%= ord.product.title %></td>
-          <td><%= ord.product.price %></td>
-          <td><%= ord.quantity %></td>
-          <td><%= ord.total_price %></td>
+          <td><%= order_items.id %></td>
+          <td><%= order_items.product.title %></td>
+          <td><%= order_items.product.price %></td>
+          <td><%= order_items.quantity %></td>
+          <td><%= order_items.total_price %></td>
         </tr>
       <% end %>
     </tbody>
