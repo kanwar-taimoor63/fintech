@@ -1,5 +1,5 @@
 module Api::V1
-  class OrdersController < BaseController
+  class OrdersController < Api::BaseController
 
     def index
       @orders = Order.where(user_id: current_user).search(params[:search])

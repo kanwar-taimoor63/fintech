@@ -1,5 +1,5 @@
 module Api::V1
-  class ProductsController < BaseController
+  class ProductsController < Api::BaseController
 
     def index
       @products = Product.search(params[:search])
