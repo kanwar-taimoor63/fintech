@@ -1,36 +1,44 @@
-
-
-
+<nav class="navbar navbar-light justify-content-between mini-nav">
+  <a class="navbar-brand text-primary">Subscriptions</a>
+  <form class="form-inline float-right">
+    <%= form_with method: :get, local: true do |f| %>
+      <%= f.datetime_field :date_from, value: params[:date_from], class: 'form-control' %><hr width='10'/>
+      <%= f.datetime_field :date_to, value: params[:date_to], class: 'form-control'%><hr width='10'/>
+      <%= f.submit 'search' , class: 'btn btn-primary'%>
+    <% end %><hr/>
+    <a class="navbar-brand text-primary">No. Of Orders: <%= @orders.count %> </a>
+  </form>
+</nav><br/>
 <div class='text-center'>
-    <table class='table table-striped table-bordered table-hover'>
-      <thead class='bg-primary text-white'>
-        <tr>
-          <th > Order id </th>
-          <th > Customer id </th>
-          <th > Name </th>
-          <th > Email </th>
-          <th colspan='2'> Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% if @orders.empty? %>
-          <p class='alert alert-danger text-center'>No products to show</p>
-          <% else %>
-            <% @orders.each do |order| %>
-              <tr>
-              <td><%= order.id %></td>
-              <td><%= order.user_id %></td>
-              <td><%= order.firstname %> <%=  order.lastname %></td>
-              <td><%= order.email %></td>
-              <td>
-                <%= link_to 'Show', admin_subscription_path(order) , class: 'btn btn-primary' %>
-                <%#= link_to 'Edit', [:edit, :admin, product], class: 'btn btn-primary' %>
-                <%= link_to 'Destroy', admin_subscription_path(order), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %>
-              </td>
-            </tr>
-            <% end %>
+  <table class='table table-striped table-bordered table-hover'>
+    <thead class='bg-primary text-white'>
+      <tr>
+        <th > Order id </th>
+        <th > Customer id </th>
+        <th > Name </th>
+        <th > Email </th>
+        <th > Total Amount </th>
+        <th colspan='2'> Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @orders.empty? %>
+        <p class='alert alert-danger text-center'>No Orders to show</p>
+      <% else %>
+        <% @orders.each do |order| %>
+          <tr>
+            <td><%= order.id %></td>
+            <td><%= order.user_id %></td>
+            <td><%= order.firstname %> <%=  order.lastname %></td>
+            <td><%= order.email %></td>
+            <td><%= order.subtotal %></td>
+            <td>
+              <%= link_to 'Show', admin_subscription_path(order) , class: 'btn btn-primary' %>
+              <%= link_to 'Destroy', admin_subscription_path(order), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %>
+            </td>
+          </tr>
         <% end %>
-      </tbody>
-    </table>
-  </div>
-
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -12,7 +12,7 @@
           <div class='pull-right'>
           <%= form_for(item, remote: true) do |f| %>
             <%= f.hidden_field :product_id, value: item.product.id %>
-            <h5><%= item.product.price %></h5>
+            <h5><%= item.product.price_with_discount %></h5>
             <div class='form-group'>
               <%= f.number_field :quantity, value: item.quantity.to_i, min: 1, class: 'form-control' %>
             </div>
