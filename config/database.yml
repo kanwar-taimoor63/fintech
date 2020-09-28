@@ -49,6 +49,7 @@ test:
 #
 production:
   <<: *default
+  adapter: postgresql
   database: fintech_production
   username: fintech
   password: <%= ENV['FINTECH_DATABASE_PASSWORD'] %>
