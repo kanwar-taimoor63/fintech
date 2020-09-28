@@ -50,6 +50,9 @@ test:
 production:
   <<: *default
   adapter: postgresql
-  database: fintech_production
-  username: fintech
-  password: <%= ENV['FINTECH_DATABASE_PASSWORD'] %>
+  database: dm783h2e7avtt
+  username: zbqswrebkirdyp
+  password: 052b265a4470c5e8049276a1a93d6a2c8801e33965902a6b6aa9a3f9bfb13d3c
+  Port: 5432
+  host: ec2-54-152-40-168.compute-1.amazonaws.com
+
