@@ -19,5 +19,17 @@ Rails.application.routes.draw do
   get 'policy', to: 'pages#policy'
   devise_for :users, controllers: { registrations: 'registrations' }
 
-  match "*path", to: "pages#error_404", via: :all
+  namespace :api do
+    namespace :v1 do
+      resources :products, only: %i[index]
+    end
+    namespace :v2 do
+      post :auth, to: 'authentication#create'
+      resources :products, only: %i[index]
+    end
+    get '/*a', to: 'pages#error_404', via: :all
+  end
+
+  match '*path', to: 'pages#error_404', via: :all
+  
 end

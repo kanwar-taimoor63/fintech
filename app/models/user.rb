@@ -10,7 +10,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
   attr_writer :login
 
-
   def self.csv_attr
     %w[id username email role]
   end

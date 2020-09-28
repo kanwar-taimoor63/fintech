@@ -52,11 +52,7 @@ module Admin
     private
 
     def set_category
-      @category = begin
-                    Category.find(params[:id])
-                  rescue StandardError
-                    nil
-                  end
+    @category = Category.find(params[:id])          
     end
 
     def category_params
